@@ -1,11 +1,27 @@
 <!DOCTYPE html>
-<html>
+<html lang="pl">
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
+
+        {% block vendor_scripts %}
+            <link href="{{ asset('build/application.css') }}" rel="stylesheet"/>
+            <script src="{{ asset('build/application.js') }}"></script>
+        {% endblock %}
+
+        {% block bootstrap %}
+            <link href="{{ asset('build/bootstrap.css') }}" rel="stylesheet"/>
+            <script src="{{ asset('build/bootstrap.js') }}"></script>
+        {% endblock %}
     </head>
     <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="{{ path('home') }}">
+                <img src="/img/" width="30" height="30" class="d-inline-block align-top" alt="">
+                Bootstrap
+            </a>
+        </nav>
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
     </body>

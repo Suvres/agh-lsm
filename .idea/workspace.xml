@@ -19,7 +19,14 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f91c4532-5c2a-4e19-b123-35e2f0b4b516" name="Default Changelist" comment="" />
+    <list default="true" id="f91c4532-5c2a-4e19-b123-35e2f0b4b516" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/security.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/security.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/twig.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/twig.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Menu/MenuBuilder.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Menu/MenuBuilder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/security/login.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/security/login.html.twig" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -164,6 +171,9 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/templates" />
       <recent name="$PROJECT_DIR$/assets/shared" />
@@ -181,6 +191,7 @@
       <workItem from="1609261355074" duration="128000" />
       <workItem from="1609261493298" duration="742000" />
       <workItem from="1609262529777" duration="5241000" />
+      <workItem from="1609270521442" duration="537000" />
     </task>
     <servers />
   </component>
@@ -197,21 +208,36 @@
         </entry>
       </map>
     </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="User">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="*" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="666" y="281" width="578" height="539" key="NewPhpClassDialog" timestamp="1609264784891">
+    <state x="666" y="281" width="641" height="539" key="NewPhpClassDialog" timestamp="1609269490830">
       <screen x="0" y="25" width="1920" height="1055" />
     </state>
-    <state x="666" y="281" width="578" height="539" key="NewPhpClassDialog/0.25.1920.1055@0.25.1920.1055" timestamp="1609264784891" />
-    <state x="464" y="187" key="SettingsEditor" timestamp="1609264668022">
+    <state x="666" y="281" width="641" height="539" key="NewPhpClassDialog/0.25.1920.1055@0.25.1920.1055" timestamp="1609269490830" />
+    <state x="464" y="187" key="SettingsEditor" timestamp="1609269240930">
       <screen x="0" y="25" width="1920" height="1055" />
     </state>
-    <state x="464" y="187" key="SettingsEditor/0.25.1920.1055@0.25.1920.1055" timestamp="1609264668022" />
-    <state x="540" y="300" width="897" height="643" key="find.popup" timestamp="1609264715005">
+    <state x="464" y="187" key="SettingsEditor/0.25.1920.1055@0.25.1920.1055" timestamp="1609269240930" />
+    <state x="540" y="300" width="897" height="643" key="find.popup" timestamp="1609272041689">
       <screen x="0" y="25" width="1920" height="1055" />
     </state>
-    <state x="540" y="300" width="897" height="643" key="find.popup/0.25.1920.1055@0.25.1920.1055" timestamp="1609264715005" />
+    <state x="540" y="300" width="897" height="643" key="find.popup/0.25.1920.1055@0.25.1920.1055" timestamp="1609272041689" />
     <state x="623" y="257" width="672" height="678" key="search.everywhere.popup" timestamp="1609266388503">
       <screen x="0" y="25" width="1920" height="1055" />
     </state>

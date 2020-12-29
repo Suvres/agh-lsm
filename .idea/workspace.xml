@@ -20,10 +20,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f91c4532-5c2a-4e19-b123-35e2f0b4b516" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/agh-lsm.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/agh-lsm.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/scss/main-styles.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/packages/knp_menu.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Menu/MenuBuilder.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/menu.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/DefaultController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/DefaultController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/shared/application.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/shared/application.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/bundles.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/bundles.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/services.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/services.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/default/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/default/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webpack.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.config.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -148,6 +159,8 @@
       <path value="$PROJECT_DIR$/vendor/phpdocumentor/type-resolver" />
       <path value="$PROJECT_DIR$/vendor/phpdocumentor/reflection-common" />
       <path value="$PROJECT_DIR$/vendor/composer" />
+      <path value="$PROJECT_DIR$/vendor/knplabs/knp-menu" />
+      <path value="$PROJECT_DIR$/vendor/knplabs/knp-menu-bundle" />
     </include_path>
   </component>
   <component name="ProjectId" id="1mL7TpNlVEJZ3zfl20chR1GEyBO" />
@@ -168,6 +181,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/templates" />
       <recent name="$PROJECT_DIR$/assets/shared" />
     </key>
   </component>
@@ -182,7 +196,7 @@
       <workItem from="1609261030094" duration="313000" />
       <workItem from="1609261355074" duration="128000" />
       <workItem from="1609261493298" duration="742000" />
-      <workItem from="1609262529777" duration="1210000" />
+      <workItem from="1609262529777" duration="4924000" />
     </task>
     <servers />
   </component>
@@ -202,13 +216,21 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="666" y="281" width="578" height="539" key="NewPhpClassDialog" timestamp="1609261591578">
+    <state x="666" y="281" width="578" height="539" key="NewPhpClassDialog" timestamp="1609264784891">
       <screen x="0" y="25" width="1920" height="1055" />
     </state>
-    <state x="666" y="281" width="578" height="539" key="NewPhpClassDialog/0.25.1920.1055@0.25.1920.1055" timestamp="1609261591578" />
-    <state x="464" y="187" key="SettingsEditor" timestamp="1609263379330">
+    <state x="666" y="281" width="578" height="539" key="NewPhpClassDialog/0.25.1920.1055@0.25.1920.1055" timestamp="1609264784891" />
+    <state x="464" y="187" key="SettingsEditor" timestamp="1609264668022">
       <screen x="0" y="25" width="1920" height="1055" />
     </state>
-    <state x="464" y="187" key="SettingsEditor/0.25.1920.1055@0.25.1920.1055" timestamp="1609263379330" />
+    <state x="464" y="187" key="SettingsEditor/0.25.1920.1055@0.25.1920.1055" timestamp="1609264668022" />
+    <state x="540" y="300" width="897" height="643" key="find.popup" timestamp="1609264715005">
+      <screen x="0" y="25" width="1920" height="1055" />
+    </state>
+    <state x="540" y="300" width="897" height="643" key="find.popup/0.25.1920.1055@0.25.1920.1055" timestamp="1609264715005" />
+    <state x="623" y="257" width="672" height="678" key="search.everywhere.popup" timestamp="1609266388503">
+      <screen x="0" y="25" width="1920" height="1055" />
+    </state>
+    <state x="623" y="257" width="672" height="678" key="search.everywhere.popup/0.25.1920.1055@0.25.1920.1055" timestamp="1609266388503" />
   </component>
 </project>

@@ -1,4 +1,4 @@
 import $ from 'jquery'
-import 'font-awesome/css/font-awesome.min.css'
+import 'font-awesome/scss/font-awesome.scss'
 
 global.$ = $;

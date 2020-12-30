@@ -6,13 +6,17 @@ namespace App\Menu;
 
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
+use Symfony\Component\Security\Core\Security;
 
 class MenuBuilder
 {
-    private $factory;
+    private FactoryInterface $factory;
 
-    public function __construct(FactoryInterface $factory)
+    private Security $security;
+
+    public function __construct(FactoryInterface $factory, Security $security)
     {
+        $this->security = $security;
         $this->factory = $factory;
     }
 
@@ -20,6 +24,16 @@ class MenuBuilder
     {
         $menu = $this->factory->createItem('root');
         $menu->setChildrenAttribute('class', 'navbar-nav');
+
+        if($this->security->getUser()) {
+            $this->makeChild($menu);
+        }
+
+        return $menu;
+    }
+
+    private function makeChild(ItemInterface $menu): void
+    {
         $menu->addChild('Menu 1', ['route' => 'home']);
         $menu->addChild('Menu 2', ['route' => 'home']);
         $menu->addChild('Menu 3', ['route' => 'home']);
@@ -30,9 +44,8 @@ class MenuBuilder
             ]);
 
             $child->setLinkAttributes([
-               'class' => 'nav-link'
+                'class' => 'nav-link'
             ]);
         }
-        return $menu;
     }
 }

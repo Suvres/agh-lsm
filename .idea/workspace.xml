@@ -19,7 +19,10 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f91c4532-5c2a-4e19-b123-35e2f0b4b516" name="Default Changelist" comment="" />
+    <list default="true" id="f91c4532-5c2a-4e19-b123-35e2f0b4b516" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/security.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/security.yaml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -156,6 +159,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="postgresql" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -164,6 +168,9 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/templates" />
       <recent name="$PROJECT_DIR$/assets/shared" />
@@ -181,6 +188,8 @@
       <workItem from="1609261355074" duration="128000" />
       <workItem from="1609261493298" duration="742000" />
       <workItem from="1609262529777" duration="5241000" />
+      <workItem from="1609270521442" duration="537000" />
+      <workItem from="1609348647478" duration="4095000" />
     </task>
     <servers />
   </component>
@@ -197,21 +206,52 @@
         </entry>
       </map>
     </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="User">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="*" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="666" y="281" width="578" height="539" key="NewPhpClassDialog" timestamp="1609264784891">
+    <state x="555" y="214" width="800" height="674" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1609352312956">
       <screen x="0" y="25" width="1920" height="1055" />
     </state>
-    <state x="666" y="281" width="578" height="539" key="NewPhpClassDialog/0.25.1920.1055@0.25.1920.1055" timestamp="1609264784891" />
-    <state x="464" y="187" key="SettingsEditor" timestamp="1609264668022">
+    <state x="555" y="214" width="800" height="674" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.25.1920.1055@0.25.1920.1055" timestamp="1609352312956" />
+    <state x="768" y="271" width="374" height="559" key="#com.intellij.ide.util.MemberChooser" timestamp="1609351156763">
       <screen x="0" y="25" width="1920" height="1055" />
     </state>
-    <state x="464" y="187" key="SettingsEditor/0.25.1920.1055@0.25.1920.1055" timestamp="1609264668022" />
-    <state x="540" y="300" width="897" height="643" key="find.popup" timestamp="1609264715005">
+    <state x="768" y="271" width="374" height="559" key="#com.intellij.ide.util.MemberChooser/0.25.1920.1055@0.25.1920.1055" timestamp="1609351156763" />
+    <state x="639" y="25" width="632" height="1052" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1609349658920">
       <screen x="0" y="25" width="1920" height="1055" />
     </state>
-    <state x="540" y="300" width="897" height="643" key="find.popup/0.25.1920.1055@0.25.1920.1055" timestamp="1609264715005" />
+    <state x="639" y="25" width="632" height="1052" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.25.1920.1055@0.25.1920.1055" timestamp="1609349658920" />
+    <state x="743" y="282" width="424" height="537" key="FileChooserDialogImpl" timestamp="1609352344832">
+      <screen x="0" y="25" width="1920" height="1055" />
+    </state>
+    <state x="743" y="282" width="424" height="537" key="FileChooserDialogImpl/0.25.1920.1055@0.25.1920.1055" timestamp="1609352344832" />
+    <state x="666" y="281" width="641" height="539" key="NewPhpClassDialog" timestamp="1609269490830">
+      <screen x="0" y="25" width="1920" height="1055" />
+    </state>
+    <state x="666" y="281" width="641" height="539" key="NewPhpClassDialog/0.25.1920.1055@0.25.1920.1055" timestamp="1609269490830" />
+    <state x="464" y="187" key="SettingsEditor" timestamp="1609269240930">
+      <screen x="0" y="25" width="1920" height="1055" />
+    </state>
+    <state x="464" y="187" key="SettingsEditor/0.25.1920.1055@0.25.1920.1055" timestamp="1609269240930" />
+    <state x="540" y="300" width="897" height="643" key="find.popup" timestamp="1609272041689">
+      <screen x="0" y="25" width="1920" height="1055" />
+    </state>
+    <state x="540" y="300" width="897" height="643" key="find.popup/0.25.1920.1055@0.25.1920.1055" timestamp="1609272041689" />
     <state x="623" y="257" width="672" height="678" key="search.everywhere.popup" timestamp="1609266388503">
       <screen x="0" y="25" width="1920" height="1055" />
     </state>

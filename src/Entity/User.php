@@ -2,7 +2,11 @@
 
 namespace App\Entity;
 
+use App\Entity\Book;
+use App\Entity\BooksLoans;
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -17,39 +21,62 @@ class User implements UserInterface
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private ?int $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
      */
-    private $email;
+    private string $email;
 
     /**
      * @ORM\Column(type="json")
      */
-    private $roles = [];
+    private array $roles = [];
 
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
      */
-    private $password;
+    private string $password;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private string $name;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private string $surname;
+
+    /**
+     * @ORM\Column(type="date")
+     */
+    private \DateTime $birthDate;
+
+    /**
+     * @ORM\OneToMany(targetEntity=BooksLoans::class, mappedBy="borrower")
+     */
+    private $booksLoans;
+
+    public function __construct()
+    {
+        $this->booksLoans = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getEmail(): ?string
+    public function getEmail(): string
     {
         return $this->email;
     }
 
-    public function setEmail(string $email): self
+    public function setEmail(string $email): void
     {
         $this->email = $email;
-
-        return $this;
     }
 
     /**
@@ -74,11 +101,9 @@ class User implements UserInterface
         return array_unique($roles);
     }
 
-    public function setRoles(array $roles): self
+    public function setRoles(array $roles): void
     {
         $this->roles = $roles;
-
-        return $this;
     }
 
     /**
@@ -89,11 +114,9 @@ class User implements UserInterface
         return (string) $this->password;
     }
 
-    public function setPassword(string $password): self
+    public function setPassword(string $password): void
     {
         $this->password = $password;
-
-        return $this;
     }
 
     /**
@@ -111,5 +134,63 @@ class User implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): void
+    {
+        $this->name = $name;
+    }
+
+    public function getSurname(): string
+    {
+        return $this->surname;
+    }
+
+    public function setSurname(string $surname): void
+    {
+        $this->surname = $surname;
+    }
+
+    public function getBirthDate(): \DateTime
+    {
+        return $this->birthDate;
+    }
+
+    public function setBirthDate(\DateTime $birthDate): void
+    {
+        $this->birthDate = $birthDate;
+    }
+
+    /**
+     * @return Collection|BooksLoans[]
+     */
+    public function getBooksLoans(): Collection
+    {
+        return $this->booksLoans;
+    }
+
+    public function addBooksLoan(BooksLoans $booksLoan): self
+    {
+        if (!$this->booksLoans->contains($booksLoan)) {
+            $this->booksLoans[] = $booksLoan;
+            $booksLoan->setBorrower($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBooksLoan(BooksLoans $booksLoan): void
+    {
+        if ($this->booksLoans->removeElement($booksLoan)) {
+            // set the owning side to null (unless already changed)
+            if ($booksLoan->getBorrower() === $this) {
+                $booksLoan->setBorrower(null);
+            }
+        }
     }
 }

@@ -34,6 +34,9 @@ class MenuBuilder
 
     private function makeChild(ItemInterface $menu): void
     {
+        if($this->security->isGranted("ROLE_ADMIN")) {
+            $menu->addChild('Admin', ['route' => 'admin_panel']);
+        }
         $menu->addChild('Menu 1', ['route' => 'home']);
         $menu->addChild('Menu 2', ['route' => 'home']);
         $menu->addChild('Menu 3', ['route' => 'home']);

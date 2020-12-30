@@ -22,10 +22,10 @@
     <list default="true" id="f91c4532-5c2a-4e19-b123-35e2f0b4b516" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/packages/security.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/security.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/twig.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/twig.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Menu/MenuBuilder.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Menu/MenuBuilder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/security/login.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/security/login.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20201229190833.php" beforeDir="false" afterPath="$PROJECT_DIR$/migrations/Version20201229190833.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Reader.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/EventSubscriber/RequestSubscriber.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/EventSubscriber/RequestSubscriber.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repository/ReaderRepository.php" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -192,6 +192,7 @@
       <workItem from="1609261493298" duration="742000" />
       <workItem from="1609262529777" duration="5241000" />
       <workItem from="1609270521442" duration="537000" />
+      <workItem from="1609348647478" duration="219000" />
     </task>
     <servers />
   </component>

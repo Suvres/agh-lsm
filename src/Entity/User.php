@@ -2,14 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\ReaderRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * @ORM\Entity(repositoryClass=ReaderRepository::class)
+ * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @ORM\Table(name="`user`")
  */
-class Reader implements UserInterface
+class User implements UserInterface
 {
     /**
      * @ORM\Id

@@ -20,11 +20,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f91c4532-5c2a-4e19-b123-35e2f0b4b516" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Controller/AdminController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/admin/panel.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/js/books.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/admin/book_panel.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/SecurityController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/SecurityController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/scss/bootstrap-theme.scss" beforeDir="false" afterPath="$PROJECT_DIR$/assets/scss/bootstrap-theme.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/scss/main-styles.scss" beforeDir="false" afterPath="$PROJECT_DIR$/assets/scss/main-styles.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/shared/application.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/shared/application.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/services.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/services.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/AdminController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Menu/MenuBuilder.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Menu/MenuBuilder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/admin/panel.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/panel.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/menu.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/menu.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webpack.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -171,12 +181,14 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/assets/js" />
+      <recent name="$PROJECT_DIR$/assets/" />
       <recent name="$PROJECT_DIR$/templates" />
       <recent name="$PROJECT_DIR$/assets/shared" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -194,6 +206,7 @@
       <workItem from="1609270521442" duration="537000" />
       <workItem from="1609348647478" duration="4095000" />
       <workItem from="1609356020605" duration="5252000" />
+      <workItem from="1609404437202" duration="10698000" />
     </task>
     <servers />
   </component>
@@ -252,6 +265,10 @@
       <screen x="0" y="25" width="1920" height="1055" />
     </state>
     <state x="464" y="187" key="SettingsEditor/0.25.1920.1055@0.25.1920.1055" timestamp="1609269240930" />
+    <state x="570" y="161" width="770" height="779" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1609411112925">
+      <screen x="0" y="25" width="1920" height="1055" />
+    </state>
+    <state x="570" y="161" width="770" height="779" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.25.1920.1055@0.25.1920.1055" timestamp="1609411112925" />
     <state x="540" y="300" width="897" height="643" key="find.popup" timestamp="1609272041689">
       <screen x="0" y="25" width="1920" height="1055" />
     </state>

@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="mt-5">
+    <div class="border-bottom border-info mb-4">
+        <h3 class="m-0 d-inline">Wszystkie książki</h3>
+    </div>
+</div>
+
+    <table class="table" id="bookTable">
+        <thead>
+        <tr>
+            <th scope="col" class="border-top-0">#</th>
+            <th scope="col" class="border-top-0">Tytuł</th>
+            <th scope="col" class="border-top-0">wiek</th>
+            <th scope="col" class="border-top-0">Kopie</th>
+            <th scope="col" class="border-top-0">Dostępność</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th scope="row">1</th>
+            <td>Izka - Wojowniczka z AGH</td>
+            <td>18</td>
+            <td>69</td>
+            <td>tak</td>
+        </tr>
+        </tbody>
+    </table>
+
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('build/app/js/books.js') }}"></script>
+{% endblock %}
+

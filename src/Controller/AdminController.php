@@ -23,4 +23,12 @@ class AdminController extends AbstractController
     {
         return $this->render("admin/panel.html.twig");
     }
+
+    /**
+     * @Route("/book", name="admin_book_panel")
+     */
+    public function bookPanelAction(): Response
+    {
+        return $this->render("admin/book_panel.html.twig");
+    }
 }

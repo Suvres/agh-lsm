@@ -22,6 +22,7 @@ Encore
      */
     .addEntry('application', './assets/shared/application.js')
     .addEntry('bootstrap', './assets/shared/bootstrap.js')
+    .addEntry('app/js/books', './assets/js/books.js')
     .addStyleEntry('app/css/main-styles', './assets/scss/main-styles.scss')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.

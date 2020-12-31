@@ -23,7 +23,7 @@ class MenuBuilder
     public function createMainMenu(array $options): ItemInterface
     {
         $menu = $this->factory->createItem('root');
-        $menu->setChildrenAttribute('class', 'navbar-nav');
+        $menu->setChildrenAttribute('class', 'navbar-nav w-100');
 
         if($this->security->getUser()) {
             $this->makeChild($menu);
@@ -35,20 +35,31 @@ class MenuBuilder
     private function makeChild(ItemInterface $menu): void
     {
         if($this->security->isGranted("ROLE_ADMIN")) {
-            $menu->addChild('Admin', ['route' => 'admin_panel']);
+            $dropdown = $menu->addChild(
+                'Admin', ['attributes' => ['dropdown' => true]]
+            );
+
+            $dropdown->addChild(
+                'Panel', ['route' => 'admin_panel', 'attributes' => ['icon' => 'fa fa-columns']]
+            );
+            $dropdown->addChild(
+                'Książki', ['route' => 'admin_book_panel', 'attributes' => ['icon' => 'fa fa-book']]
+            );
         }
         $menu->addChild('Menu 1', ['route' => 'home']);
         $menu->addChild('Menu 2', ['route' => 'home']);
         $menu->addChild('Menu 3', ['route' => 'home']);
 
-        foreach ($menu->getChildren() as $child) {
-            $child->setAttributes([
-                'class' => 'nav-item'
-            ]);
 
-            $child->setLinkAttributes([
-                'class' => 'nav-link'
-            ]);
+        $menu->addChild('Wyloguj się', ['route' => 'app_logout', 'attributes' => ['icon' => 'fa fa-sign-out']])
+        ->setAttribute('class', 'ml-lg-auto');
+
+        foreach ($menu->getChildren() as $child) {
+            $c = $child->getAttribute('class');
+            $linkC = $child->getLinkAttribute('class');
+
+            $child->setLinkAttribute('class', $linkC. ' nav-link');
+            $child->setAttribute('class', $c. ' nav-item');
         }
     }
 }

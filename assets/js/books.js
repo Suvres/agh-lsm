@@ -6,13 +6,19 @@ $(() => {
                 searchPanes: {
                     show: true
                 },
-                targets: [2]
+                targets: [3]
             },
             {
                 searchPanes: {
                     show: true
                 },
                 targets: [4]
+            },
+            {
+                searchPanes: {
+                    show: true
+                },
+                targets: [5]
             }
         ]
     });

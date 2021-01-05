@@ -6,6 +6,7 @@ use App\Repository\BookCopiesRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\PersistentCollection;
 
 /**
  * @ORM\Entity(repositoryClass=BookCopiesRepository::class)
@@ -33,7 +34,7 @@ class BookCopies
     /**
      * @ORM\OneToMany(targetEntity=BooksLoans::class, mappedBy="bookCopy")
      */
-    private ArrayCollection $booksLoans;
+    private PersistentCollection $booksLoans;
 
     /**
      * BookCopies constructor.
@@ -43,7 +44,6 @@ class BookCopies
     {
         $this->hashcode = substr(hash('sha256', time()), 0, 25);
         $this->book = $book;
-        $this->booksLoans = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -62,9 +62,9 @@ class BookCopies
     }
 
     /**
-     * @return Collection|BooksLoans[]
+     * @return PersistentCollection|BooksLoans[]
      */
-    public function getBooksLoans(): Collection
+    public function getBooksLoans(): PersistentCollection
     {
         return $this->booksLoans;
     }

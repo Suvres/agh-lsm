@@ -25,7 +25,7 @@
             <tr>
                 <th scope="row">{{ loop.index }}</th>
                 <td>{{ book.author }}</td>
-                <td>{{ book.title }}</td>
+                <td><a class="btn btn-link" href="{{ path('admin_book_site', { book: book.id }) }}">{{ book.title }}</a></td>
                 <td>{{ book.brand }}</td>
                 <td>{{ book.ageThreshold }}</td>
                 <td>{{ book.bookCopies|length }}</td>

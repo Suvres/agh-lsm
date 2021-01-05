@@ -2,6 +2,9 @@ import $ from 'jquery'
 global.$ = $;
 
 import 'font-awesome/scss/font-awesome.scss'
+import 'select2/dist/css/select2.min.css'
+import '@ttskch/select2-bootstrap4-theme/dist/select2-bootstrap4.min.css'
+import 'select2/dist/js/select2.full.min'
 
 import 'pdfmake'
 import 'datatables.net-bs4/css/dataTables.bootstrap4.min.css'

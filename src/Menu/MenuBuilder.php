@@ -45,6 +45,8 @@ class MenuBuilder
             $dropdown->addChild(
                 'Książki', ['route' => 'admin_book_panel', 'attributes' => ['icon' => 'fa fa-book']]
             );
+
+            $menu->addChild("Wypożycz", ['route' => 'admin_loan_new', 'attributes' => ['icon' => 'fa fa-save']]);
         }
         $menu->addChild('Menu 1', ['route' => 'home']);
         $menu->addChild('Menu 2', ['route' => 'home']);

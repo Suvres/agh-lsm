@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="mt-5">
+        <div class="border-bottom border-info mb-4">
+            <h3 class="m-0 d-inline">Wypożycz</h3>
+        </div>
+    </div>
+
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <label class="input-group-text" for="inputGroupSelect01">Options</label>
+        </div>
+        <select class="custom-select" id="inputGroupSelect01">
+            <option selected>Szukaj...</option>
+            {%- for copy in books -%}
+                <option value="{{ copy.id }}" data-book="{{ copy.book.title }}" data-url="{{ path('admin_loan_info', { bookCopy: copy.id }) }}">{{ copy.hashcode }}</option>
+            {%- endfor -%}
+        </select>
+    </div>
+    <div class="mt-3" id="book-info">
+
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('app/js/bookLoansNew') }}
+{% endblock %}
+

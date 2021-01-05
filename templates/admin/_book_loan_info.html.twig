@@ -1,0 +1,24 @@
+<table class="table table-striped">
+    <tbody>
+    <tr>
+        <th scope="row">Tytuł</th>
+        <td>{{ bookCopy.book.title }}</td>
+    </tr>
+    <tr>
+        <th scope="row">Autor</th>
+        <td>{{ bookCopy.book.author }}</td>
+    </tr>
+    <tr>
+        <th scope="row">Granica wieku</th>
+        <td>{{ bookCopy.book.ageThreshold }}</td>
+    </tr>
+    <tr>
+        <th scope="row">Ilość Kopii</th>
+        <td>{{ bookCopy.book.bookCopies|length }}</td>
+    </tr>
+    <tr>
+        <th scope="row">Wypożycz</th>
+        <td>Kopia niedostępna</td>
+    </tr>
+    </tbody>
+</table>

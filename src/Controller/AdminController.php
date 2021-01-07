@@ -55,7 +55,7 @@ class AdminController extends AbstractController
     /**
      * @Route("/book/panel", name="admin_book_panel")
      */
-    public function bookPanelAction()
+    public function bookPanelAction(): Response
     {
         $books = $this->bookRepository->findNonDelete();
 

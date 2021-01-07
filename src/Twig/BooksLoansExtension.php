@@ -11,7 +11,7 @@ class BooksLoansExtension extends AbstractExtension
     public function getFilters()
     {
         return [
-          new TwigFilter('is_in_loans', [BooksLoansService::class, 'isInLoans'])
+            new TwigFilter('is_in_loans', [BooksLoansService::class, 'isInLoans']),
         ];
     }
 }

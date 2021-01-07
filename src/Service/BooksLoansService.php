@@ -9,9 +9,6 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class BooksLoansService
 {
-    /**
-     * @var EntityManagerInterface
-     */
     private EntityManagerInterface $entityManager;
 
     public function __construct(
@@ -24,7 +21,7 @@ class BooksLoansService
     {
         $copies = $bookCopies->getBooksLoans();
         $loan = $copies->filter(function (BooksLoans $booksLoans) {
-            return $booksLoans->getCommittedAt() == null;
+            return $booksLoans->getCommittedAt() === null;
         })->first();
 
         return $loan instanceof BooksLoans ? $loan : null;
@@ -37,14 +34,14 @@ class BooksLoansService
         }
 
         $canBorrow = false;
-        if (in_array("ROLE_ADMIN", $bookLoanDTO->getUser()->getRoles(), true)) {
+        if (\in_array('ROLE_ADMIN', $bookLoanDTO->getUser()->getRoles(), true)) {
             $canBorrow = true;
         }
-
 
         if ($canBorrow) {
             $bc = new BooksLoans($bookLoanDTO->getUser(), $bookCopies);
             $this->entityManager->persist($bc);
+
             return true;
         }
 

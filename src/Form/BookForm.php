@@ -16,25 +16,25 @@ class BookForm extends AbstractType
     {
         $builder
             ->add('author', TextType::class, [
-                'label' => 'Autor'
+                'label' => 'Autor',
             ])
             ->add('title', TextType::class, [
-                'label' => 'Tytuł'
+                'label' => 'Tytuł',
             ])
             ->add('ageThreshold', NumberType::class, [
                 'label' => 'Granica wieku',
-                'html5' => true
+                'html5' => true,
             ])
             ->add('brand', ChoiceType::class, [
                 'label' => 'Gatunek',
-                'choices' => Book::BOOK_BRANDS
+                'choices' => Book::BOOK_BRANDS,
             ]);
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Book::class
+            'data_class' => Book::class,
         ]);
     }
 }

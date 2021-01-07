@@ -34,10 +34,6 @@ class BookCopies
      */
     private PersistentCollection $booksLoans;
 
-    /**
-     * BookCopies constructor.
-     * @param Book $book
-     */
     public function __construct(Book $book)
     {
         $this->hashcode = substr(hash('sha256', time()), 0, 25);

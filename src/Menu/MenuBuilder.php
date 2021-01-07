@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Menu;
 
 use Knp\Menu\FactoryInterface;
@@ -33,25 +32,50 @@ class MenuBuilder
 
     private function makeChild(ItemInterface $menu): void
     {
-        if ($this->security->isGranted("ROLE_ADMIN")) {
-            $menu->addChild('Panel', ['route' => 'admin_panel', 'attributes' => ['icon' => 'fa fa-columns']]);
-            $menu->addChild('Książki', ['route' => 'admin_book_panel', 'attributes' => ['icon' => 'fa fa-book']]);
-            $menu->addChild("Zarządzaj", ['route' => 'admin_loan', 'attributes' => ['icon' => 'fa fa-save']]);
+        if ($this->security->isGranted('ROLE_ADMIN')) {
+            $menu->addChild('Panel', [
+                'route' => 'admin_panel',
+                'attributes' => [
+                    'icon' => 'fa fa-columns',
+                ],
+            ]);
+            $menu->addChild('Książki', [
+                'route' => 'admin_book_panel',
+                'attributes' => [
+                    'icon' => 'fa fa-book',
+                ],
+            ]);
+            $menu->addChild('Zarządzaj', [
+                'route' => 'admin_loan',
+                'attributes' => [
+                    'icon' => 'fa fa-save',
+                ],
+            ]);
         }
-        $menu->addChild('Menu 1', ['route' => 'home']);
-        $menu->addChild('Menu 2', ['route' => 'home']);
-        $menu->addChild('Menu 3', ['route' => 'home']);
+        $menu->addChild('Menu 1', [
+            'route' => 'home',
+        ]);
+        $menu->addChild('Menu 2', [
+            'route' => 'home',
+        ]);
+        $menu->addChild('Menu 3', [
+            'route' => 'home',
+        ]);
 
-
-        $menu->addChild('Wyloguj się', ['route' => 'app_logout', 'attributes' => ['icon' => 'fa fa-sign-out']])
+        $menu->addChild('Wyloguj się', [
+            'route' => 'app_logout',
+            'attributes' => [
+                'icon' => 'fa fa-sign-out',
+            ],
+        ])
         ->setAttribute('class', 'ml-lg-auto');
 
         foreach ($menu->getChildren() as $child) {
             $c = $child->getAttribute('class');
             $linkC = $child->getLinkAttribute('class');
 
-            $child->setLinkAttribute('class', $linkC . ' nav-link');
-            $child->setAttribute('class', $c . ' nav-item');
+            $child->setLinkAttribute('class', $linkC.' nav-link');
+            $child->setAttribute('class', $c.' nav-item');
         }
     }
 }

@@ -21,7 +21,7 @@ class Book
     public const BOOK_BRANDS = [
         self::EPIKA => 'Epika',
         self::DRAMAT => 'Dramat',
-        self::LIRYKA => 'Liryka'
+        self::LIRYKA => 'Liryka',
     ];
 
     public const BOOK_LIMITS = 3;
@@ -74,7 +74,6 @@ class Book
         $this->createdAt = new \DateTime();
         $this->bookCopies = new ArrayCollection();
     }
-
 
     public function getId(): ?int
     {
@@ -160,6 +159,6 @@ class Book
 
     public function removeBookCopy(BookCopies $bookCopy): void
     {
-        throw new Exception("TODO");
+        throw new Exception('TODO');
     }
 }

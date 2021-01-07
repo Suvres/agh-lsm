@@ -3,7 +3,6 @@
 
 namespace App\Controller;
 
-
 use App\DTO\BookLoanDTO;
 use App\Entity\Book;
 use App\Entity\BookCopies;
@@ -48,8 +47,7 @@ class AdminController extends AbstractController
         BookRepository $bookRepository,
         BookCopiesRepository $bookCopiesRepository,
         BooksLoansService $booksLoansService
-    )
-    {
+    ) {
         $this->booksLoansService = $booksLoansService;
         $this->bookCopiesRepository = $bookCopiesRepository;
         $this->bookRepository = $bookRepository;
@@ -78,13 +76,13 @@ class AdminController extends AbstractController
     /**
      * @Route("/book/new", name="admin_book_panel_new")
      */
-    public function newBookAction(Request $request):Response
+    public function newBookAction(Request $request): Response
     {
         $book = new Book();
         $form = $this->createForm(BookForm::class, $book);
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $this->entityManager->persist($book);
             $this->entityManager->flush();
 
@@ -144,7 +142,6 @@ class AdminController extends AbstractController
         $this->entityManager->flush();
         $this->addFlash('success', 'Oddano książkę');
         return $this->redirectToRoute("home");
-
     }
 
     /**
@@ -155,13 +152,12 @@ class AdminController extends AbstractController
         $bookLoanDTO = new BookLoanDTO();
         $form = $this->createForm(BookLoanForm::class, $bookLoanDTO);
         $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             if ($this->booksLoansService->borrow($bookLoanDTO, $bookCopy)) {
                 $this->entityManager->flush();
 
                 $this->addFlash('success', 'Wypożyczono książkę');
-            }
-            else{
+            } else {
                 $this->addFlash('danger', 'Nie można wypożyczyć książki, prawdopodobnie przekroczono limit książek');
             }
 

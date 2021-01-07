@@ -3,7 +3,6 @@
 
 namespace App\Menu;
 
-
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
 use Symfony\Component\Security\Core\Security;
@@ -25,7 +24,7 @@ class MenuBuilder
         $menu = $this->factory->createItem('root');
         $menu->setChildrenAttribute('class', 'navbar-nav w-100');
 
-        if($this->security->getUser()) {
+        if ($this->security->getUser()) {
             $this->makeChild($menu);
         }
 
@@ -34,7 +33,7 @@ class MenuBuilder
 
     private function makeChild(ItemInterface $menu): void
     {
-        if($this->security->isGranted("ROLE_ADMIN")) {
+        if ($this->security->isGranted("ROLE_ADMIN")) {
             $menu->addChild('Panel', ['route' => 'admin_panel', 'attributes' => ['icon' => 'fa fa-columns']]);
             $menu->addChild('Książki', ['route' => 'admin_book_panel', 'attributes' => ['icon' => 'fa fa-book']]);
             $menu->addChild("Zarządzaj", ['route' => 'admin_loan', 'attributes' => ['icon' => 'fa fa-save']]);
@@ -51,8 +50,8 @@ class MenuBuilder
             $c = $child->getAttribute('class');
             $linkC = $child->getLinkAttribute('class');
 
-            $child->setLinkAttribute('class', $linkC. ' nav-link');
-            $child->setAttribute('class', $c. ' nav-item');
+            $child->setLinkAttribute('class', $linkC . ' nav-link');
+            $child->setAttribute('class', $c . ' nav-item');
         }
     }
 }

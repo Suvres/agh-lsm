@@ -14,7 +14,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Book
 {
-
     public const EPIKA = 'epika';
     public const LIRYKA = 'liryka';
     public const DRAMAT = 'dramat';
@@ -161,7 +160,6 @@ class Book
 
     public function removeBookCopy(BookCopies $bookCopy): void
     {
-       throw new Exception("TODO");
+        throw new Exception("TODO");
     }
-
 }

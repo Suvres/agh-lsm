@@ -6,7 +6,6 @@ use App\DTO\BookLoanDTO;
 use App\Entity\BookCopies;
 use App\Entity\BooksLoans;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\Security\Core\Security;
 
 class BooksLoansService
 {
@@ -17,8 +16,7 @@ class BooksLoansService
 
     public function __construct(
         EntityManagerInterface $entityManager
-    )
-    {
+    ) {
         $this->entityManager = $entityManager;
     }
 
@@ -44,7 +42,7 @@ class BooksLoansService
         }
 
 
-        if($canBorrow) {
+        if ($canBorrow) {
             $bc = new BooksLoans($bookLoanDTO->getUser(), $bookCopies);
             $this->entityManager->persist($bc);
             return true;

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\DTO;
 
 use App\Entity\User;
@@ -16,6 +17,4 @@ class BookLoanDTO
     {
         $this->user = $user;
     }
-
-
 }

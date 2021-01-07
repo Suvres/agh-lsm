@@ -8,7 +8,6 @@ use Doctrine\Persistence\ObjectManager;
 
 class LoadUserFixtures extends Fixture
 {
-
     /**
      * password: test_pass
      */

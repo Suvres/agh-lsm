@@ -10,6 +10,8 @@ use App\Form\BookForm;
 use App\Form\BookLoanForm;
 use App\Repository\BookCopiesRepository;
 use App\Repository\BookRepository;
+use App\Repository\BooksLoansRepository;
+use App\Repository\UserRepository;
 use App\Service\BooksLoansService;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -31,14 +33,26 @@ class AdminController extends AbstractController
     private BookCopiesRepository $bookCopiesRepository;
 
     private BooksLoansService $booksLoansService;
+    /**
+     * @var UserRepository
+     */
+    private UserRepository $userRepository;
+    /**
+     * @var BooksLoansRepository
+     */
+    private BooksLoansRepository $booksLoansRepository;
 
     public function __construct(
         EntityManagerInterface $entityManager,
         BookRepository $bookRepository,
         BookCopiesRepository $bookCopiesRepository,
-        BooksLoansService $booksLoansService
+        BooksLoansService $booksLoansService,
+        UserRepository $userRepository,
+        BooksLoansRepository $booksLoansRepository
     ) {
+        $this->userRepository = $userRepository;
         $this->booksLoansService = $booksLoansService;
+        $this->booksLoansRepository = $booksLoansRepository;
         $this->bookCopiesRepository = $bookCopiesRepository;
         $this->bookRepository = $bookRepository;
         $this->entityManager = $entityManager;
@@ -49,7 +63,14 @@ class AdminController extends AbstractController
      */
     public function panelAction(): Response
     {
-        return $this->render('admin/panel.html.twig');
+        $users = $this->userRepository->findAll();
+        $loans = $this->booksLoansRepository->findAllInLoans(10);
+        $bookCopies = $this->bookCopiesRepository->findAll();
+        return $this->render('admin/panel.html.twig', [
+            'loans' => $loans,
+            'users' => $users,
+            'bookCopies' => $bookCopies
+        ]);
     }
 
     /**

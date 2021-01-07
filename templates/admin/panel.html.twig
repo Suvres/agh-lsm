@@ -6,7 +6,7 @@
             <div class="card border-warning">
                 <div class="card-header bg-warning font-weight-bold">Ilość czytelników</div>
                 <div class="card-body text-center">
-                    0
+                    {{ users|length }}
                 </div>
             </div>
         </div>
@@ -14,15 +14,15 @@
             <div class="card border-primary">
                 <div class="card-header bg-primary font-weight-bold">Ilość Ksiązek</div>
                 <div class="card-body text-center">
-                    0
+                    {{ bookCopies|length }}
                 </div>
             </div>
         </div>
         <div class="col-md-4">
             <div class="card border-info">
-                <div class="card-header bg-info font-weight-bold">Ilość wypożyczeń</div>
+                <div class="card-header bg-info font-weight-bold">Ilość aktualnych wypożyczeń</div>
                 <div class="card-body text-center">
-                    0
+                    {{ loans|length }}
                 </div>
             </div>
         </div>
@@ -43,12 +43,14 @@
             </tr>
             </thead>
             <tbody>
+            {% for loan in loans %}
                 <tr>
-                    <td>Izka - Wojowniczka z AGH</td>
-                    <td>Towarzysz@jpieczaro.aro</td>
-                    <td>2021-12-12</td>
-                    <td>18</td>
+                    <td>{{ loan.bookCopy.book.title }}</td>
+                    <td>{{ loan.borrower.email }}</td>
+                    <td>{{ loan.startedAt|date('Y-m-d') }}</td>
+                    <td>{{ date(loan.startedAt).diff( date("now"|date) ).days }}</td>
                 </tr>
+            {% endfor %}
             </tbody>
         </table>
     </div>

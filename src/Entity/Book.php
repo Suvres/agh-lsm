@@ -25,6 +25,8 @@ class Book
         self::LIRYKA => 'Liryka'
     ];
 
+    public const BOOK_LIMITS = 3;
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue

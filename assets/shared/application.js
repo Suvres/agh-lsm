@@ -1,5 +1,15 @@
 import $ from 'jquery'
 global.$ = $;
+global.postLink = function(url) {
+    let form = $('<form>', {
+        method: 'post',
+        action: url
+    });
+    $("body").append(form);
+
+    form.submit();
+
+};
 
 import 'font-awesome/scss/font-awesome.scss'
 import 'select2/dist/css/select2.min.css'

@@ -35,18 +35,9 @@ class MenuBuilder
     private function makeChild(ItemInterface $menu): void
     {
         if($this->security->isGranted("ROLE_ADMIN")) {
-            $dropdown = $menu->addChild(
-                'Admin', ['attributes' => ['dropdown' => true]]
-            );
-
-            $dropdown->addChild(
-                'Panel', ['route' => 'admin_panel', 'attributes' => ['icon' => 'fa fa-columns']]
-            );
-            $dropdown->addChild(
-                'Książki', ['route' => 'admin_book_panel', 'attributes' => ['icon' => 'fa fa-book']]
-            );
-
-            $menu->addChild("Wypożycz", ['route' => 'admin_loan_new', 'attributes' => ['icon' => 'fa fa-save']]);
+            $menu->addChild('Panel', ['route' => 'admin_panel', 'attributes' => ['icon' => 'fa fa-columns']]);
+            $menu->addChild('Książki', ['route' => 'admin_book_panel', 'attributes' => ['icon' => 'fa fa-book']]);
+            $menu->addChild("Zarządzaj", ['route' => 'admin_loan', 'attributes' => ['icon' => 'fa fa-save']]);
         }
         $menu->addChild('Menu 1', ['route' => 'home']);
         $menu->addChild('Menu 2', ['route' => 'home']);

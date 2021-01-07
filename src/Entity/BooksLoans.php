@@ -80,4 +80,9 @@ class BooksLoans
     {
         $this->committedAt = $committedAt;
     }
+
+    public function returnBook(): void
+    {
+        $this->committedAt = new \DateTime();
+    }
 }

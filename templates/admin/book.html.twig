@@ -57,11 +57,12 @@
         </thead>
         <tbody>
         {% for copy in book.bookCopies %}
+            {% set loan = copy|is_in_loans %}
             <tr>
                 <td>{{ copy.id }}</td>
                 <td>{{ copy.hashcode }}</td>
                 <td>{{ copy.booksLoans.count }}</td>
-                <td>nie</td>
+                <td>{{ loan is null ? "nie" : loan.borrower.email ~ ' - ' ~ loan.startedAt|date('Y-m-d') }}</td>
             </tr>
         {% endfor %}
         </tbody>

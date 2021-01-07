@@ -16,9 +16,21 @@
         <th scope="row">Ilość Kopii</th>
         <td>{{ bookCopy.book.bookCopies|length }}</td>
     </tr>
+    {% set loan = bookCopy|is_in_loans %}
+    <tr class="table-{% if loan is empty %}success{% else %}danger{% endif %}">
+        <th scope="row">Akcje</th>
+        <td>
+            {% if not loan %}
+            <a id="new-loan" href="#" class="btn btn-primary" data-path="{{ path('admin_loan_new', {bookCopy: bookCopy.id}) }}"><i class="fa fa-check"></i>&nbsp;Wypożycz</a>
+            {% else %}
+            <p>
+                <b>Wypożyczone:</b> {{ (loan).borrower.email }} - {{ (loan).startedAt|date('Y-m-d') }} <a class="btn btn-warning" id="loan-return" href="{{ path('admin_loan_return', {loan: loan.id}) }}">Oddaj</a>
+            </p>
+            {% endif %}
+        </td>
+    </tr>
     <tr>
-        <th scope="row">Wypożycz</th>
-        <td>Kopia niedostępna</td>
+        <td colspan="2" id="book-loan"></td>
     </tr>
     </tbody>
 </table>

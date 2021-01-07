@@ -4,11 +4,15 @@
 namespace App\Controller;
 
 
+use App\DTO\BookLoanDTO;
 use App\Entity\Book;
 use App\Entity\BookCopies;
+use App\Entity\BooksLoans;
 use App\Form\BookForm;
+use App\Form\BookLoanForm;
 use App\Repository\BookCopiesRepository;
 use App\Repository\BookRepository;
+use App\Service\BooksLoansService;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -34,13 +38,19 @@ class AdminController extends AbstractController
      * @var BookCopiesRepository
      */
     private BookCopiesRepository $bookCopiesRepository;
+    /**
+     * @var BooksLoansService
+     */
+    private BooksLoansService $booksLoansService;
 
     public function __construct(
         EntityManagerInterface $entityManager,
         BookRepository $bookRepository,
-        BookCopiesRepository $bookCopiesRepository
+        BookCopiesRepository $bookCopiesRepository,
+        BooksLoansService $booksLoansService
     )
     {
+        $this->booksLoansService = $booksLoansService;
         $this->bookCopiesRepository = $bookCopiesRepository;
         $this->bookRepository = $bookRepository;
         $this->entityManager = $entityManager;
@@ -109,9 +119,9 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/book/loans/new", name="admin_loan_new")
+     * @Route("/book/loans/info", name="admin_loan")
      */
-    public function bookLoadAction(Request $request): Response
+    public function bookLoansInfoAction(Request $request): Response
     {
         $books = $this->bookCopiesRepository->findAll();
         return $this->render('admin/book_loan_new.html.twig', ['books' => $books]);
@@ -123,5 +133,44 @@ class AdminController extends AbstractController
     public function bookInfoAction(BookCopies $bookCopy, Request $request): Response
     {
         return $this->render('admin/_book_loan_info.html.twig', ['bookCopy' => $bookCopy]);
+    }
+
+    /**
+     * @Route("/book/loans/return/{loan}", name="admin_loan_return", requirements={"loan":"\d{1,9}"}, methods={"POST"})
+     */
+    public function bookLoanReturn(BooksLoans $loan): Response
+    {
+        $loan->returnBook();
+        $this->entityManager->flush();
+        $this->addFlash('success', 'Oddano książkę');
+        return $this->redirectToRoute("home");
+
+    }
+
+    /**
+     * @Route("/book/loans/new/{bookCopy}", name="admin_loan_new", requirements={"bookCopy":"\d{1,9}"}, methods={"POST"})
+     */
+    public function bookLoanAction(BookCopies $bookCopy, Request $request): Response
+    {
+        $bookLoanDTO = new BookLoanDTO();
+        $form = $this->createForm(BookLoanForm::class, $bookLoanDTO);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()) {
+            if ($this->booksLoansService->borrow($bookLoanDTO, $bookCopy)) {
+                $this->entityManager->flush();
+
+                $this->addFlash('success', 'Wypożyczono książkę');
+            }
+            else{
+                $this->addFlash('danger', 'Nie można wypożyczyć książki, prawdopodobnie przekroczono limit książek');
+            }
+
+            return $this->redirectToRoute("home");
+        }
+
+        return $this->render('admin/_book_loan.html.twig', [
+            'form' => $form->createView(),
+            'bookCopy' => $bookCopy
+        ]);
     }
 }

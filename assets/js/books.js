@@ -4,22 +4,16 @@ $(() => {
         columnDefs: [
             {
                 searchPanes: {
-                    show: true
+                    show: false
                 },
-                targets: [3]
+                targets: [0,1,2,5]
             },
             {
                 searchPanes: {
                     show: true
                 },
-                targets: [4]
+                targets: [3,4,6]
             },
-            {
-                searchPanes: {
-                    show: true
-                },
-                targets: [5]
-            }
         ]
     });
 })

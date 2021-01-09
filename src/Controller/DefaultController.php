@@ -9,9 +9,6 @@ use Symfony\Component\Security\Core\Security;
 
 class DefaultController extends AbstractController
 {
-    /**
-     * @var Security
-     */
     private Security $security;
 
     public function __construct(Security $security)
@@ -24,11 +21,10 @@ class DefaultController extends AbstractController
      */
     public function indexAction(): Response
     {
-        if($this->security->isGranted("ROLE_ADMIN")) {
-            return $this->redirectToRoute("admin_panel");
+        if ($this->security->isGranted('ROLE_ADMIN')) {
+            return $this->redirectToRoute('admin_panel');
         }
-        else{
-            return $this->redirectToRoute("admin_panel");
-        }
+
+        return $this->redirectToRoute('admin_panel');
     }
 }

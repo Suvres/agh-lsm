@@ -3,17 +3,23 @@
 namespace App\Service;
 
 use App\DTO\BookLoanDTO;
+use App\Entity\Book;
 use App\Entity\BookCopies;
 use App\Entity\BooksLoans;
+use App\Repository\BooksLoansRepository;
 use Doctrine\ORM\EntityManagerInterface;
 
 class BooksLoansService
 {
     private EntityManagerInterface $entityManager;
 
+    private BooksLoansRepository $booksLoansRepository;
+
     public function __construct(
-        EntityManagerInterface $entityManager
+        EntityManagerInterface $entityManager,
+        BooksLoansRepository $booksLoansRepository
     ) {
+        $this->booksLoansRepository = $booksLoansRepository;
         $this->entityManager = $entityManager;
     }
 
@@ -35,6 +41,8 @@ class BooksLoansService
 
         $canBorrow = false;
         if (\in_array('ROLE_ADMIN', $bookLoanDTO->getUser()->getRoles(), true)) {
+            $canBorrow = true;
+        } elseif ($this->booksLoansRepository->findForUserInLoans($bookLoanDTO->getUser())->count() < Book::BOOK_LIMITS) {
             $canBorrow = true;
         }
 

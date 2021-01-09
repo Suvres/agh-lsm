@@ -3,9 +3,9 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\PersistentCollection;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
@@ -55,12 +55,7 @@ class User implements UserInterface
     /**
      * @ORM\OneToMany(targetEntity=BooksLoans::class, mappedBy="borrower")
      */
-    private $booksLoans;
-
-    public function __construct()
-    {
-        $this->booksLoans = new ArrayCollection();
-    }
+    private PersistentCollection $booksLoans;
 
     public function getId(): ?int
     {
@@ -170,25 +165,5 @@ class User implements UserInterface
     public function getBooksLoans(): Collection
     {
         return $this->booksLoans;
-    }
-
-    public function addBooksLoan(BooksLoans $booksLoan): self
-    {
-        if (!$this->booksLoans->contains($booksLoan)) {
-            $this->booksLoans[] = $booksLoan;
-            $booksLoan->setBorrower($this);
-        }
-
-        return $this;
-    }
-
-    public function removeBooksLoan(BooksLoans $booksLoan): void
-    {
-        if ($this->booksLoans->removeElement($booksLoan)) {
-            // set the owning side to null (unless already changed)
-            if ($booksLoan->getBorrower() === $this) {
-                $booksLoan->setBorrower(null);
-            }
-        }
     }
 }

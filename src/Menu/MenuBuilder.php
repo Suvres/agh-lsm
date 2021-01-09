@@ -51,6 +51,12 @@ class MenuBuilder
                     'icon' => 'fa fa-save',
                 ],
             ]);
+            $menu->addChild('Użytkownicy', [
+                'route' => 'admin_user_panel',
+                'attributes' => [
+                    'icon' => 'fa fa-user',
+                ],
+            ]);
         }
         $menu->addChild('Menu 1', [
             'route' => 'home',

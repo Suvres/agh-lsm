@@ -40,6 +40,11 @@ class BookCopies
         $this->book = $book;
     }
 
+    public function __sleep()
+    {
+        return [];
+    }
+
     public function getId(): ?int
     {
         return $this->id;

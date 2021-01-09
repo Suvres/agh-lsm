@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\BooksLoans;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Persistence\ManagerRegistry;
@@ -22,10 +23,21 @@ class BooksLoansRepository extends ServiceEntityRepository
 
     public function findAllInLoans(int $max): ArrayCollection
     {
-        $qb = $this->createQueryBuilder("b")
-            ->andWhere("b.committedAt is null")
-            ->orderBy("b.startedAt", "DESC")
+        $qb = $this->createQueryBuilder('b')
+            ->andWhere('b.committedAt is null')
+            ->orderBy('b.startedAt', 'DESC')
             ->setMaxResults($max)
+            ->getQuery()->getResult();
+
+        return new ArrayCollection($qb);
+    }
+
+    public function findForUserInLoans(User $getUser): ArrayCollection
+    {
+        $qb = $this->createQueryBuilder('b')
+            ->andWhere('b.committedAt is null')
+            ->andWhere('b.borrower = :u')->setParameter('u', $getUser)
+            ->orderBy('b.startedAt', 'DESC')
             ->getQuery()->getResult();
 
         return new ArrayCollection($qb);

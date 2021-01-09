@@ -6,8 +6,10 @@ use App\DTO\BookLoanDTO;
 use App\Entity\Book;
 use App\Entity\BookCopies;
 use App\Entity\BooksLoans;
+use App\Entity\User;
 use App\Form\BookForm;
 use App\Form\BookLoanForm;
+use App\Form\UserForm;
 use App\Repository\BookCopiesRepository;
 use App\Repository\BookRepository;
 use App\Repository\BooksLoansRepository;
@@ -19,6 +21,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
  * @IsGranted("ROLE_ADMIN")
@@ -33,14 +36,12 @@ class AdminController extends AbstractController
     private BookCopiesRepository $bookCopiesRepository;
 
     private BooksLoansService $booksLoansService;
-    /**
-     * @var UserRepository
-     */
+
     private UserRepository $userRepository;
-    /**
-     * @var BooksLoansRepository
-     */
+
     private BooksLoansRepository $booksLoansRepository;
+
+    private UserPasswordEncoderInterface $encoder;
 
     public function __construct(
         EntityManagerInterface $entityManager,
@@ -48,8 +49,10 @@ class AdminController extends AbstractController
         BookCopiesRepository $bookCopiesRepository,
         BooksLoansService $booksLoansService,
         UserRepository $userRepository,
-        BooksLoansRepository $booksLoansRepository
+        BooksLoansRepository $booksLoansRepository,
+        UserPasswordEncoderInterface $encoder
     ) {
+        $this->encoder = $encoder;
         $this->userRepository = $userRepository;
         $this->booksLoansService = $booksLoansService;
         $this->booksLoansRepository = $booksLoansRepository;
@@ -66,10 +69,11 @@ class AdminController extends AbstractController
         $users = $this->userRepository->findAll();
         $loans = $this->booksLoansRepository->findAllInLoans(10);
         $bookCopies = $this->bookCopiesRepository->findAll();
+
         return $this->render('admin/panel.html.twig', [
             'loans' => $loans,
             'users' => $users,
-            'bookCopies' => $bookCopies
+            'bookCopies' => $bookCopies,
         ]);
     }
 
@@ -187,6 +191,51 @@ class AdminController extends AbstractController
         return $this->render('admin/_book_loan.html.twig', [
             'form' => $form->createView(),
             'bookCopy' => $bookCopy,
+        ]);
+    }
+
+    /**
+     * @Route("/user/panel", name="admin_user_panel")
+     */
+    public function userPanelAction(): Response
+    {
+        $users = $this->userRepository->findAll();
+
+        return $this->render('admin/user_panel.html.twig', [
+            'users' => $users,
+        ]);
+    }
+
+    /**
+     * @Route("/user/new", name="admin_user_panel_new")
+     */
+    public function newUserAction(Request $request): Response
+    {
+        $user = new User();
+        $form = $this->createForm(UserForm::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $pass = sprintf('%s.%s', mb_strtolower($user->getName()), mb_strtolower($user->getSurname()));
+            $user->setPassword($this->encoder->encodePassword($user, $pass));
+            $this->entityManager->persist($user);
+            $this->entityManager->flush();
+
+            return $this->redirectToRoute('admin_user_panel');
+        }
+
+        return $this->render('admin/user_panel_new.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/user/{user}", name="admin_user_panel_info", requirements={"user"="\d{1,9}"})
+     */
+    public function userInfoAction(User $user): Response
+    {
+        return $this->render('admin/user_info.html.twig', [
+            'user' => $user,
         ]);
     }
 }

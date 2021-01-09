@@ -23,6 +23,7 @@ Encore
     .addEntry('application', './assets/shared/application.js')
     .addEntry('bootstrap', './assets/shared/bootstrap.js')
     .addEntry('app/js/books', './assets/js/books.js')
+    .addEntry('app/js/user', './assets/js/user.js')
     .addEntry('app/js/bookCopies', './assets/js/bookCopies.js')
     .addEntry('app/js/bookLoansNew', './assets/js/bookLoansNew.js')
     .addStyleEntry('app/css/main-styles', './assets/scss/main-styles.scss')

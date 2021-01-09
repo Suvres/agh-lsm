@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="mt-5">
+        <div class="border-bottom border-info mb-4">
+            <h3 class="m-0 d-inline">Nowy Użytkownik</h3>
+        </div>
+    </div>
+    {{ form_start(form) }}
+    {{ form_row(form.name) }}
+    {{ form_row(form.surname) }}
+    {{ form_row(form.email) }}
+    {{ form_row(form.birthDate) }}
+    <div class="form-group row">
+        <div class="col-sm-10 offset-sm-2">
+            <button type="submit" class="btn btn-success w-100">Zapisz</button>
+        </div>
+    </div>
+    {{ form_end(form) }}
+    <div>
+
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+
+{% endblock %}
+

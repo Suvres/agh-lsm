@@ -57,4 +57,11 @@ $btn-info-border: darken($btn-info-bg, 5%);
 $btn-disabled-color: $gray-dark;
 $btn-disabled-bg-color: $gray-light;
 
+.dropdown-menu.bg-dark .dropdown-item:hover, .dropdown-menu.bg-dark .dropdown-item:focus {
+  background-color: lighten($gray-dark, 20%) !important;
+}
+
+.dropdown-item{
+  padding: 5px 20px !important;
+}
 @import '~bootstrap';

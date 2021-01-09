@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\EventSubscriber;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -26,7 +25,7 @@ class RequestSubscriber implements EventSubscriberInterface
         if (
             !$event->isMasterRequest()
             || $request->isXmlHttpRequest()
-            || 'app_login' === $request->attributes->get('_route')
+            || $request->attributes->get('_route') === 'app_login'
         ) {
             return;
         }
@@ -37,7 +36,7 @@ class RequestSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents(): array
     {
         return [
-            KernelEvents::REQUEST => ['onKernelRequest']
+            KernelEvents::REQUEST => ['onKernelRequest'],
         ];
     }
 }

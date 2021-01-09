@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="mt-5">
+        <div class="border-bottom border-info mb-4">
+            <h3 class="m-0 d-inline">Wszyscy użytkownicy</h3>
+            <a class="float-right badge badge-success" href="{{ path('admin_user_panel_new') }}"><i class="fa fa-plus"></i>&nbsp;Dodaj nowego</a>
+        </div>
+    </div>
+
+    <table class="table" id="userTable">
+        <thead>
+        <tr>
+            <th scope="col" class="border-top-0">#</th>
+            <th scope="col" class="border-top-0">Imię</th>
+            <th scope="col" class="border-top-0">Nazwisko</th>
+            <th scope="col" class="border-top-0">Login</th>
+            <th scope="col" class="border-top-0">Ilość wypożyczonych książek</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <th scope="row">{{ loop.index }}</th>
+                <td>{{ user.name }}</td>
+                <td>{{ user.surname }}</td>
+                <td><a href="{{ path('admin_user_panel_info', {user: user.id}) }}">{{ user.email }}</a></td>
+                <td>{{ user.booksLoans|length }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('build/app/js/user.js') }}"></script>
+{% endblock %}

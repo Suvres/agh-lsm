@@ -38,18 +38,12 @@ class BooksLoans
      */
     private ?\DateTime $committedAt;
 
-    /**
-     * BooksLoans constructor.
-     * @param User $borrower
-     * @param BookCopies $bookCopy
-     */
     public function __construct(User $borrower, BookCopies $bookCopy)
     {
         $this->borrower = $borrower;
         $this->bookCopy = $bookCopy;
         $this->startedAt = new \DateTime();
     }
-
 
     public function getId(): ?int
     {
@@ -79,5 +73,10 @@ class BooksLoans
     public function setCommittedAt(\DateTime $committedAt): void
     {
         $this->committedAt = $committedAt;
+    }
+
+    public function returnBook(): void
+    {
+        $this->committedAt = new \DateTime();
     }
 }

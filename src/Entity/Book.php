@@ -7,12 +7,25 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Config\Definition\Exception\Exception;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=BookRepository::class)
  */
 class Book
 {
+    public const EPIKA = 'epika';
+    public const LIRYKA = 'liryka';
+    public const DRAMAT = 'dramat';
+
+    public const BOOK_BRANDS = [
+        self::EPIKA => 'Epika',
+        self::DRAMAT => 'Dramat',
+        self::LIRYKA => 'Liryka',
+    ];
+
+    public const BOOK_LIMITS = 3;
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -32,6 +45,7 @@ class Book
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\Range(min="0", max="18", notInRangeMessage="Przedział wiekowy powinien zawierać się w zakresie {{ min }} <=> {{ max }}")
      */
     private int $ageThreshold;
 
@@ -55,23 +69,11 @@ class Book
      */
     private $bookCopies;
 
-    /**
-     * Book constructor.
-     * @param string $author
-     * @param string $title
-     * @param int $ageThreshold
-     * @param string $brand
-     */
-    public function __construct(string $author, string $title, int $ageThreshold, string $brand)
+    public function __construct()
     {
-        $this->author = $author;
-        $this->title = $title;
-        $this->ageThreshold = $ageThreshold;
-        $this->brand = $brand;
         $this->createdAt = new \DateTime();
         $this->bookCopies = new ArrayCollection();
     }
-
 
     public function getId(): ?int
     {
@@ -157,6 +159,6 @@ class Book
 
     public function removeBookCopy(BookCopies $bookCopy): void
     {
-       throw new Exception("TODO");
+        throw new Exception('TODO');
     }
 }

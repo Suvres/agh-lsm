@@ -1,0 +1,8 @@
+{{ form_start(form) }}
+{{ form_row(form.user) }}
+<div class="form-group row">
+    <div class="col-sm-10 offset-sm-2">
+        <button formaction="{{ path('admin_loan_new', {bookCopy: bookCopy.id}) }}" class="btn btn-success w-100" type="submit">Zapisz</button>
+    </div>
+</div>
+{{ form_end(form) }}

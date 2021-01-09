@@ -2,12 +2,10 @@
 
 namespace App\Entity;
 
-use App\Entity\Book;
-use App\Entity\BooksLoans;
 use App\Repository\UserRepository;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\PersistentCollection;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
@@ -57,12 +55,7 @@ class User implements UserInterface
     /**
      * @ORM\OneToMany(targetEntity=BooksLoans::class, mappedBy="borrower")
      */
-    private $booksLoans;
-
-    public function __construct()
-    {
-        $this->booksLoans = new ArrayCollection();
-    }
+    private PersistentCollection $booksLoans;
 
     public function getId(): ?int
     {
@@ -86,7 +79,7 @@ class User implements UserInterface
      */
     public function getUsername(): string
     {
-        return (string) $this->email;
+        return (string)$this->email;
     }
 
     /**
@@ -111,7 +104,7 @@ class User implements UserInterface
      */
     public function getPassword(): string
     {
-        return (string) $this->password;
+        return (string)$this->password;
     }
 
     public function setPassword(string $password): void
@@ -122,7 +115,7 @@ class User implements UserInterface
     /**
      * @see UserInterface
      */
-    public function getSalt()
+    public function getSalt(): void
     {
         // not needed when using the "bcrypt" algorithm in security.yaml
     }
@@ -130,7 +123,7 @@ class User implements UserInterface
     /**
      * @see UserInterface
      */
-    public function eraseCredentials()
+    public function eraseCredentials(): void
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
@@ -172,25 +165,5 @@ class User implements UserInterface
     public function getBooksLoans(): Collection
     {
         return $this->booksLoans;
-    }
-
-    public function addBooksLoan(BooksLoans $booksLoan): self
-    {
-        if (!$this->booksLoans->contains($booksLoan)) {
-            $this->booksLoans[] = $booksLoan;
-            $booksLoan->setBorrower($this);
-        }
-
-        return $this;
-    }
-
-    public function removeBooksLoan(BooksLoans $booksLoan): void
-    {
-        if ($this->booksLoans->removeElement($booksLoan)) {
-            // set the owning side to null (unless already changed)
-            if ($booksLoan->getBorrower() === $this) {
-                $booksLoan->setBorrower(null);
-            }
-        }
     }
 }

@@ -3,7 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\BooksLoans;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -19,32 +21,25 @@ class BooksLoansRepository extends ServiceEntityRepository
         parent::__construct($registry, BooksLoans::class);
     }
 
-    // /**
-    //  * @return BooksLoans[] Returns an array of BooksLoans objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function findAllInLoans(int $max): ArrayCollection
     {
-        return $this->createQueryBuilder('b')
-            ->andWhere('b.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('b.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+        $qb = $this->createQueryBuilder('b')
+            ->andWhere('b.committedAt is null')
+            ->orderBy('b.startedAt', 'DESC')
+            ->setMaxResults($max)
+            ->getQuery()->getResult();
 
-    /*
-    public function findOneBySomeField($value): ?BooksLoans
-    {
-        return $this->createQueryBuilder('b')
-            ->andWhere('b.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        return new ArrayCollection($qb);
     }
-    */
+
+    public function findForUserInLoans(User $getUser): ArrayCollection
+    {
+        $qb = $this->createQueryBuilder('b')
+            ->andWhere('b.committedAt is null')
+            ->andWhere('b.borrower = :u')->setParameter('u', $getUser)
+            ->orderBy('b.startedAt', 'DESC')
+            ->getQuery()->getResult();
+
+        return new ArrayCollection($qb);
+    }
 }

@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="mt-5">
+        <div class="border-bottom border-info mb-4">
+            <h3 class="m-0 d-inline">Użytkownik</h3>
+            <a class="badge badge-secondary float-right" href="{{ path('admin_user_panel') }}"><i class="fa fa-arrow-left"></i>&nbsp;Powrót</a>
+        </div>
+    </div>
+
+    <table class="table table-striped">
+        <tr>
+            <th scope="row">Imię</th>
+            <td>{{ user.name }}</td>
+        </tr>
+        <tr>
+            <th scope="row">Nazwisko</th>
+            <td>{{ user.surname }}</td>
+        </tr>
+        <tr>
+            <th scope="row">Email</th>
+            <td>{{ user.email }}</td>
+        </tr>
+        <tr>
+            <th scope="row">Data urodzenia</th>
+            <td>{{ user.birthDate|date("Y-m-d") }} - {{ date(user.birthDate).diff( date("now"|date) ).format("%y") }} lat</td>
+        </tr>
+    </table>
+
+    <div class="mt-5">
+        <div class="border-bottom border-info mb-4">
+            <h3 class="m-0 d-inline">Wypożyczenia</h3>
+        </div>
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Tytuł</th>
+                <th scope="col">Autor</th>
+                <th scope="col">Data wypożyczenia</th>
+                <th scope="col">Dni</th>
+                <th scope="col">Oddane</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for book in user.booksLoans %}
+            <tr class="table-{{ book.committedAt is null ? "danger" : "success" }}">
+                <th scope="row">{{ loop.index }}</th>
+                <td><a href="{{ path('admin_book_site', {book: book.bookCopy.book.id }) }}">{{ book.bookCopy.book.title }}</a></td>
+                <td>{{ book.bookCopy.book.author }}</td>
+                <td>{{ book.startedAt|date("Y-m-d") }}</td>
+                <td>{{ date(book.startedAt).diff( date("now"|date) ).format("%a") }}</td>
+                <td>{{ book.committedAt is null ? "nie" : "tak" }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block javascripts %}
+
+{% endblock %}
+

@@ -1,8 +1,10 @@
 $(function (){
-    $("#book-new-copy").on("click", function (event){
+
+
+    $(".import-button").on("click", function (event){
         event.preventDefault();
-        let url = $("#book-new-copy").data("path");
-        if(confirm("Czy na pewno chcesz dodać kopię")) {
+        let url = $(this).data("path");
+        if(confirm($(this).data("text"))) {
             window.location = url;
         }
     })

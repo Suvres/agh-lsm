@@ -68,7 +68,7 @@ class AdminController extends AbstractController
     {
         $users = $this->userRepository->findAll();
         $loans = $this->booksLoansRepository->findAllInLoans(10);
-        $bookCopies = $this->bookCopiesRepository->findAll();
+        $bookCopies = $this->bookCopiesRepository->findNonDelete();
 
         return $this->render('admin/panel.html.twig', [
             'loans' => $loans,
@@ -101,6 +101,7 @@ class AdminController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->entityManager->persist($book);
             $this->entityManager->flush();
+            $this->addFlash("success", "Poprawnie dodano książkę");
 
             return $this->redirectToRoute('admin_book_panel');
         }
@@ -115,6 +116,11 @@ class AdminController extends AbstractController
      */
     public function bookSiteAction(Book $book): Response
     {
+        if($book->getDeletedAt()) {
+            $this->addFlash("danger", "Książka została usunięta");
+            return $this->redirectToRoute('home');
+        }
+
         return $this->render('admin/book.html.twig', [
             'book' => $book,
         ]);
@@ -123,11 +129,17 @@ class AdminController extends AbstractController
     /**
      * @Route("/book/{book}/new-copy", name="admin_book_copy_new", requirements={"book"="\d{1,9}"})
      */
-    public function bookCopyNewAction(Book $book, Request $request): Response
+    public function bookCopyNewAction(Book $book): Response
     {
+        if($book->getDeletedAt()) {
+            $this->addFlash("danger", "Książka została usunięta");
+            return $this->redirectToRoute('home');
+        }
+
         $bookCopies = new BookCopies($book);
         $this->entityManager->persist($bookCopies);
         $this->entityManager->flush();
+        $this->addFlash("success", "Poprawnie dodano kopię książki");
 
         return $this->redirectToRoute('admin_book_site', [
             'book' => $book->getId(),
@@ -137,9 +149,9 @@ class AdminController extends AbstractController
     /**
      * @Route("/book/loans/info", name="admin_loan")
      */
-    public function bookLoansInfoAction(Request $request): Response
+    public function bookLoansInfoAction(): Response
     {
-        $books = $this->bookCopiesRepository->findAll();
+        $books = $this->bookCopiesRepository->findNonDelete();
 
         return $this->render('admin/book_loan_new.html.twig', [
             'books' => $books,
@@ -149,8 +161,15 @@ class AdminController extends AbstractController
     /**
      * @Route("/book/loans/info/{bookCopy}", name="admin_loan_info", requirements={"bookCopy"="\d{1,9}"}, methods={"POST"})
      */
-    public function bookInfoAction(BookCopies $bookCopy, Request $request): Response
+    public function bookInfoAction(BookCopies $bookCopy): Response
     {
+
+        if($bookCopy->getBook()->getDeletedAt()) {
+            $this->addFlash("danger", "Książka została usunięta");
+            return $this->redirectToRoute('home');
+        }
+
+
         return $this->render('admin/_book_loan_info.html.twig', [
             'bookCopy' => $bookCopy,
         ]);
@@ -173,6 +192,11 @@ class AdminController extends AbstractController
      */
     public function bookLoanAction(BookCopies $bookCopy, Request $request): Response
     {
+        if($bookCopy->getBook()->getDeletedAt()) {
+            $this->addFlash("danger", "Książka została usunięta");
+            return $this->redirectToRoute('home');
+        }
+
         $bookLoanDTO = new BookLoanDTO();
         $form = $this->createForm(BookLoanForm::class, $bookLoanDTO);
         $form->handleRequest($request);
@@ -220,6 +244,7 @@ class AdminController extends AbstractController
             $user->setPassword($this->encoder->encodePassword($user, $pass));
             $this->entityManager->persist($user);
             $this->entityManager->flush();
+            $this->addFlash("success", "Poprawnie dodano użytkownika");
 
             return $this->redirectToRoute('admin_user_panel');
         }
@@ -238,4 +263,55 @@ class AdminController extends AbstractController
             'user' => $user,
         ]);
     }
+
+    /**
+     * @Route("/book/{book}/edit", name="admin_book_edit", requirements={"book"="\d{1,9}"})
+     */
+    public function bookEditAction(Book $book, Request $request): Response
+    {
+        if($book->getDeletedAt()) {
+            $this->addFlash("danger", "Książka została usunięta");
+            return $this->redirectToRoute('home');
+        }
+
+        $form = $this->createForm(BookForm::class, $book);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->entityManager->flush();
+            $this->addFlash("success", "Poprawnie zapisano dane książki");
+
+            return $this->redirectToRoute("admin_book_site", ['book' => $book]);
+        }
+
+        return $this->render("admin/book_edit.html.twig", [
+            "form" => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/book/{book}/delete", name="admin_book_delete", requirements={"book"="\d{1,9}"})
+     */
+    public function delBookAction(Book $book): Response
+    {
+        if($book->getDeletedAt()) {
+            $this->addFlash("danger", "Książka została usunięta");
+            return $this->redirectToRoute('home');
+        }
+
+        $book->setDeletedAt();
+        foreach ($book->getBookCopies() as $copy){
+            foreach ($copy->getBooksLoans() as $loan ) {
+                if(!$loan->getCommittedAt()) {
+                    $loan->returnBook();
+                }
+            }
+        }
+
+        $this->entityManager->flush();
+        $this->addFlash("success", "Poprawnie usunięto książkę");
+
+        return $this->redirectToRoute('home');
+    }
+
 }

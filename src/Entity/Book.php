@@ -135,9 +135,9 @@ class Book
         return $this->deletedAt;
     }
 
-    public function setDeletedAt(\DateTime $deletedAt): void
+    public function setDeletedAt(): void
     {
-        $this->deletedAt = $deletedAt;
+        $this->deletedAt = new \DateTime();
     }
 
     /**

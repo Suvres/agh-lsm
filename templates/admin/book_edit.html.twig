@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div>
+    {{ form_start(form) }}
+    {{ form_row(form.title) }}
+    {{ form_row(form.author) }}
+    {{ form_row(form.brand) }}
+    {{ form_row(form.ageThreshold) }}
+    <div class="form-group row">
+        <div class="offset-sm-2 col-sm-10">
+            <button class="w-100 btn btn-success" type="submit">Zapisz</button>
+        </div>
+    </div>
+
+    {{ form_end(form) }}
+</div>
+{% endblock %}
+
+

@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\BookCopies;
+use App\Entity\BooksLoans;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -19,32 +20,16 @@ class BookCopiesRepository extends ServiceEntityRepository
         parent::__construct($registry, BookCopies::class);
     }
 
-    // /**
-    //  * @return BookCopies[] Returns an array of BookCopies objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * @return BooksLoans[]
+     */
+    public function findNonDelete(): array
     {
-        return $this->createQueryBuilder('b')
-            ->andWhere('b.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('b.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+        return $this->createQueryBuilder('l')
+            ->leftJoin('l.book', 'b')->addSelect('b')
+            ->where('b.deletedAt is null')
+            ->orderBy('b.title', 'ASC')
+            ->getQuery()->getResult();
     }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?BookCopies
-    {
-        return $this->createQueryBuilder('b')
-            ->andWhere('b.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

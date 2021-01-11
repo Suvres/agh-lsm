@@ -43,6 +43,7 @@ class BooksLoans
         $this->borrower = $borrower;
         $this->bookCopy = $bookCopy;
         $this->startedAt = new \DateTime();
+        $this->committedAt = null;
     }
 
     public function getId(): ?int

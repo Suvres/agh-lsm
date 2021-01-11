@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="mt-5">
+        <div class="border-bottom border-info mb-4">
+            <h3 class="m-0 d-inline">Wszystkie książki</h3>
+        </div>
+    </div>
+
+    <table class="table" id="bookTable">
+        <thead>
+        <tr>
+            <th scope="col" class="border-top-0">#</th>
+            <th scope="col" class="border-top-0">Autor</th>
+            <th scope="col" class="border-top-0">Tytuł</th>
+            <th scope="col" class="border-top-0">Gatunek</th>
+            <th scope="col" class="border-top-0">Wiek</th>
+            <th scope="col" class="border-top-0">Dostępność</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for book in books %}
+            <tr class="{{book|is_available ? "" : "table-danger" }}">
+                <th scope="row">{{ loop.index }}</th>
+                <td>{{ book.author }}</td>
+                <td>{{ book.title }}</td>
+                <td>{{ book.brand }}</td>
+                <td>{{ book.ageThreshold }}</td>
+                <td>{{ book|is_available ? "tak" : "nie" }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('build/app/js/userBooks.js') }}"></script>
+{% endblock %}

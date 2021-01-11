@@ -1,0 +1,3 @@
+$(() => {
+    $('#bookTable').DataTable();
+})

@@ -57,24 +57,29 @@ class MenuBuilder
                     'icon' => 'fa fa-user',
                 ],
             ]);
+        } else {
+            $menu->addChild('Książki', [
+                'route' => 'book_search',
+                'attributes' => [
+                    'icon' => 'fa fa-book',
+                ],
+            ]);
         }
-        $menu->addChild('Menu 1', [
-            'route' => 'home',
-        ]);
-        $menu->addChild('Menu 2', [
-            'route' => 'home',
-        ]);
-        $menu->addChild('Menu 3', [
-            'route' => 'home',
-        ]);
+
+        $menu->addChild('Ja', [
+            'route' => 'account',
+            'attributes' => [
+                'icon' => 'fa fa-user',
+            ],
+        ])
+        ->setAttribute('class', 'ml-lg-auto');
 
         $menu->addChild('Wyloguj się', [
             'route' => 'app_logout',
             'attributes' => [
                 'icon' => 'fa fa-sign-out',
             ],
-        ])
-        ->setAttribute('class', 'ml-lg-auto');
+        ]);
 
         foreach ($menu->getChildren() as $child) {
             $c = $child->getAttribute('class');

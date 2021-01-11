@@ -48,7 +48,7 @@
                     <td>{{ loan.bookCopy.book.title }}</td>
                     <td>{{ loan.borrower.email }}</td>
                     <td>{{ loan.startedAt|date('Y-m-d') }}</td>
-                    <td>{{ date(loan.startedAt).diff( date("now"|date) ).days }}</td>
+                    <td>{{ date(loan.startedAt|date("Y-m-d")).diff(date("now"|date("Y-m-d")) ).days }}</td>
                 </tr>
             {% endfor %}
             </tbody>

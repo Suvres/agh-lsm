@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div>
+        <div class="border-bottom border-info mb-4">
+            <h3 class="m-0 d-inline">Edycja danych</h3>
+            <a href="{{ path('account') }}" class="badge badge-secondary btn float-right"><i class="fa fa-arrow-left"></i>Powrót</a>
+        </div>
+
+        {{ form_start(form) }}
+        {{ form_row(form.name) }}
+        {{ form_row(form.surname) }}
+        {{ form_row(form.birthDate) }}
+        {{ form_row(form.email) }}
+        <div class="form-group row">
+            <div class="offset-sm-2 col-sm-10">
+                <button class="btn btn-success w-100" type="submit">Zapisz dane</button>
+            </div>
+        </div>
+        {{ form_end(form) }}
+    </div>
+    <div class="mt-5">
+        <div class="border-bottom border-info mb-4">
+            <h3 class="m-0 d-inline">Zmień hasło</h3>
+        </div>
+
+        {{ form_start(form2) }}
+        {{ form_row(form2.plainPassword) }}
+        <div class="form-group row">
+            <div class="offset-sm-2 col-sm-10">
+                <button class="btn btn-success w-100" type="submit">Zapisz hasło</button>
+            </div>
+        </div>
+        {{ form_end(form2) }}
+
+    </div>
+{% endblock %}

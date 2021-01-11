@@ -61,7 +61,7 @@ class BooksLoansService
         $loans = true;
         foreach ($book->getBookCopies() as $copy) {
             foreach ($copy->getBooksLoans() as $loan) {
-                if ($loan->getCommittedAt() == null) {
+                if ($loan->getCommittedAt() === null) {
                     $loans = false;
                     break;
                 }

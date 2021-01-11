@@ -74,7 +74,6 @@ class MenuBuilder
         ])
         ->setAttribute('class', 'ml-lg-auto');
 
-
         $menu->addChild('Wyloguj się', [
             'route' => 'app_logout',
             'attributes' => [

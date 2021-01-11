@@ -11,19 +11,16 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Security;
 
 /**
- * Class DefaultController
+ * Class DefaultController.
+ *
  * @method User getUser()
  */
 class DefaultController extends AbstractController
 {
     private Security $security;
-    /**
-     * @var BooksLoansRepository
-     */
+
     private BooksLoansRepository $booksLoansRepository;
-    /**
-     * @var BookRepository
-     */
+
     private BookRepository $bookRepository;
 
     public function __construct(Security $security, BooksLoansRepository $booksLoansRepository, BookRepository $bookRepository)
@@ -51,8 +48,9 @@ class DefaultController extends AbstractController
     public function booksSearchAction(): Response
     {
         $books = $this->bookRepository->findAll();
+
         return $this->render('default/user_book_search.html.twig', [
-            'books' => $books
+            'books' => $books,
         ]);
     }
 
@@ -61,10 +59,10 @@ class DefaultController extends AbstractController
      */
     public function myAccountAction(): Response
     {
-
         $books = $this->booksLoansRepository->findForUserOrderForLoans($this->getUser());
+
         return $this->render('default/user_panel.html.twig', [
-            'loans' => $books
+            'loans' => $books,
         ]);
     }
 }

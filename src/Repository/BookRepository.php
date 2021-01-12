@@ -32,10 +32,9 @@ class BookRepository extends ServiceEntityRepository
 
     public function findNonDeleteForUser(User $getUser)
     {
-
         return $this->createQueryBuilder('b')
             ->andWhere('b.deletedAt IS NULL')
-            ->andWhere('b.ageThreshold <= :y')->setParameter("y", $getUser->getBirthDate()->diff(new \DateTime())->format("%y"))
+            ->andWhere('b.ageThreshold <= :y')->setParameter('y', $getUser->getBirthDate()->diff(new \DateTime())->format('%y'))
             ->getQuery()->getResult();
     }
 }

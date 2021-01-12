@@ -101,7 +101,7 @@ class AdminController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->entityManager->persist($book);
             $this->entityManager->flush();
-            $this->addFlash("success", "Poprawnie dodano książkę");
+            $this->addFlash('success', 'Poprawnie dodano książkę');
 
             return $this->redirectToRoute('admin_book_panel');
         }
@@ -116,8 +116,9 @@ class AdminController extends AbstractController
      */
     public function bookSiteAction(Book $book): Response
     {
-        if($book->getDeletedAt()) {
-            $this->addFlash("danger", "Książka została usunięta");
+        if ($book->getDeletedAt()) {
+            $this->addFlash('danger', 'Książka została usunięta');
+
             return $this->redirectToRoute('home');
         }
 
@@ -131,15 +132,16 @@ class AdminController extends AbstractController
      */
     public function bookCopyNewAction(Book $book): Response
     {
-        if($book->getDeletedAt()) {
-            $this->addFlash("danger", "Książka została usunięta");
+        if ($book->getDeletedAt()) {
+            $this->addFlash('danger', 'Książka została usunięta');
+
             return $this->redirectToRoute('home');
         }
 
         $bookCopies = new BookCopies($book);
         $this->entityManager->persist($bookCopies);
         $this->entityManager->flush();
-        $this->addFlash("success", "Poprawnie dodano kopię książki");
+        $this->addFlash('success', 'Poprawnie dodano kopię książki');
 
         return $this->redirectToRoute('admin_book_site', [
             'book' => $book->getId(),
@@ -163,12 +165,11 @@ class AdminController extends AbstractController
      */
     public function bookInfoAction(BookCopies $bookCopy): Response
     {
+        if ($bookCopy->getBook()->getDeletedAt()) {
+            $this->addFlash('danger', 'Książka została usunięta');
 
-        if($bookCopy->getBook()->getDeletedAt()) {
-            $this->addFlash("danger", "Książka została usunięta");
             return $this->redirectToRoute('home');
         }
-
 
         return $this->render('admin/_book_loan_info.html.twig', [
             'bookCopy' => $bookCopy,
@@ -192,8 +193,9 @@ class AdminController extends AbstractController
      */
     public function bookLoanAction(BookCopies $bookCopy, Request $request): Response
     {
-        if($bookCopy->getBook()->getDeletedAt()) {
-            $this->addFlash("danger", "Książka została usunięta");
+        if ($bookCopy->getBook()->getDeletedAt()) {
+            $this->addFlash('danger', 'Książka została usunięta');
+
             return $this->redirectToRoute('home');
         }
 
@@ -244,7 +246,7 @@ class AdminController extends AbstractController
             $user->setPassword($this->encoder->encodePassword($user, $pass));
             $this->entityManager->persist($user);
             $this->entityManager->flush();
-            $this->addFlash("success", "Poprawnie dodano użytkownika");
+            $this->addFlash('success', 'Poprawnie dodano użytkownika');
 
             return $this->redirectToRoute('admin_user_panel');
         }
@@ -269,8 +271,9 @@ class AdminController extends AbstractController
      */
     public function bookEditAction(Book $book, Request $request): Response
     {
-        if($book->getDeletedAt()) {
-            $this->addFlash("danger", "Książka została usunięta");
+        if ($book->getDeletedAt()) {
+            $this->addFlash('danger', 'Książka została usunięta');
+
             return $this->redirectToRoute('home');
         }
 
@@ -279,13 +282,15 @@ class AdminController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $this->entityManager->flush();
-            $this->addFlash("success", "Poprawnie zapisano dane książki");
+            $this->addFlash('success', 'Poprawnie zapisano dane książki');
 
-            return $this->redirectToRoute("admin_book_site", ['book' => $book->getId()]);
+            return $this->redirectToRoute('admin_book_site', [
+                'book' => $book->getId(),
+            ]);
         }
 
-        return $this->render("admin/book_edit.html.twig", [
-            "form" => $form->createView()
+        return $this->render('admin/book_edit.html.twig', [
+            'form' => $form->createView(),
         ]);
     }
 
@@ -294,24 +299,24 @@ class AdminController extends AbstractController
      */
     public function delBookAction(Book $book): Response
     {
-        if($book->getDeletedAt()) {
-            $this->addFlash("danger", "Książka została usunięta");
+        if ($book->getDeletedAt()) {
+            $this->addFlash('danger', 'Książka została usunięta');
+
             return $this->redirectToRoute('home');
         }
 
         $book->setDeletedAt();
-        foreach ($book->getBookCopies() as $copy){
-            foreach ($copy->getBooksLoans() as $loan ) {
-                if(!$loan->getCommittedAt()) {
+        foreach ($book->getBookCopies() as $copy) {
+            foreach ($copy->getBooksLoans() as $loan) {
+                if (!$loan->getCommittedAt()) {
                     $loan->returnBook();
                 }
             }
         }
 
         $this->entityManager->flush();
-        $this->addFlash("success", "Poprawnie usunięto książkę");
+        $this->addFlash('success', 'Poprawnie usunięto książkę');
 
         return $this->redirectToRoute('home');
     }
-
 }

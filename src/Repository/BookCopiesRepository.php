@@ -31,5 +31,4 @@ class BookCopiesRepository extends ServiceEntityRepository
             ->orderBy('b.title', 'ASC')
             ->getQuery()->getResult();
     }
-
 }

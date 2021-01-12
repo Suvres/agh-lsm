@@ -17,9 +17,11 @@ class UserPasswordForm extends AbstractType
             ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'mapped' => false,
-                'first_options' => ['label' => 'Nowe Hasło',
+                'first_options' => [
+                    'label' => 'Nowe Hasło',
                 ],
-                'second_options' => ['label' => 'Potwierdź Hasło',
+                'second_options' => [
+                    'label' => 'Potwierdź Hasło',
                 ],
                 'invalid_message' => 'Hasła muszą pasować',
             ]);

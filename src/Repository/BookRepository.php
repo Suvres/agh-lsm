@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Book;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -26,6 +27,15 @@ class BookRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('b')
             ->andWhere('b.deletedAt IS NULL')
+            ->getQuery()->getResult();
+    }
+
+    public function findNonDeleteForUser(User $getUser)
+    {
+
+        return $this->createQueryBuilder('b')
+            ->andWhere('b.deletedAt IS NULL')
+            ->andWhere('b.ageThreshold <= :y')->setParameter("y", $getUser->getBirthDate()->diff(new \DateTime())->format("%y"))
             ->getQuery()->getResult();
     }
 }

@@ -1,7 +1,7 @@
 <?php
 
 
-namespace TDD;
+namespace Functional;
 
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;

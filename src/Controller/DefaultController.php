@@ -63,7 +63,7 @@ class DefaultController extends AbstractController
      */
     public function booksSearchAction(): Response
     {
-        $books = $this->bookRepository->findAll();
+        $books = $this->bookRepository->findNonDeleteForUser($this->getUser());
 
         return $this->render('default/user_book_search.html.twig', [
             'books' => $books,

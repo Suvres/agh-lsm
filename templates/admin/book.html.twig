@@ -36,7 +36,7 @@
             <tr>
                <td colspan="2">
                    <div class="btn-group float-right">
-                       <a class="btn btn-secondary" id="book-edit" href="#" data-path="{{ path('admin_book_edit', { book: book.id }) }}"><i class="fa fa-edit"></i>&nbsp;Edytuj książkę</a>
+                       <a class="btn btn-secondary" id="book-edit" href="{{ path('admin_book_edit', { book: book.id }) }}"><i class="fa fa-edit"></i>&nbsp;Edytuj książkę</a>
                        <a data-text="Czy na pewno chcesz dodać kopię?" class="import-button btn btn-primary" id="book-new-copy" href="#" data-path="{{ path('admin_book_copy_new', { book: book.id }) }}"><i class="fa fa-plus"></i>&nbsp;Dodaj kopię</a>
                        <a data-text="Czy na pewno chcesz usunąć książkę?" class="import-button btn btn-danger" id="book-del" href="#" data-path="{{ path('admin_book_delete', { book: book.id }) }}"><i class="fa fa-close"></i>&nbsp;Usuń</a>
                    </div>

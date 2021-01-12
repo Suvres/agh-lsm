@@ -281,7 +281,7 @@ class AdminController extends AbstractController
             $this->entityManager->flush();
             $this->addFlash("success", "Poprawnie zapisano dane książki");
 
-            return $this->redirectToRoute("admin_book_site", ['book' => $book]);
+            return $this->redirectToRoute("admin_book_site", ['book' => $book->getId()]);
         }
 
         return $this->render("admin/book_edit.html.twig", [

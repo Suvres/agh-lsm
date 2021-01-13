@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Functional;
-
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
@@ -12,11 +10,11 @@ class UserDataTest extends WebTestCase
     {
         $client = static::createClient();
 
-        $client->request("GET", "/");
+        $client->request('GET', '/');
         $client->followRedirect();
         $form = $client->getCrawler()->filter('form')->form([
-           'email' => 'user@user.pl',
-            'password' => 'error'
+            'email' => 'user@user.pl',
+            'password' => 'error',
         ]);
         $client->submit($form);
         $client->followRedirect();
@@ -25,7 +23,7 @@ class UserDataTest extends WebTestCase
 
         $form = $client->getCrawler()->filter('form')->form([
             'email' => 'user@user.pl',
-            'password' => 'test_pass'
+            'password' => 'test_pass',
         ]);
         $client->submit($form);
         $client->followRedirect();
@@ -33,7 +31,7 @@ class UserDataTest extends WebTestCase
         self::assertStringContainsString('Wypożyczenia', $client->getCrawler()->text());
 
         self::assertStringContainsString('Edytuj dane', $client->getCrawler()->text());
-        $client->clickLink("Edytuj dane");
+        $client->clickLink('Edytuj dane');
 
         $form = $form = $client->getCrawler()->filter('form')->form([
             'user_data_form[name]' => 'Test',

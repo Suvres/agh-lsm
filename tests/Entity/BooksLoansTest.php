@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Entity;
-
 
 use App\Entity\BookCopies;
 use App\Entity\BooksLoans;

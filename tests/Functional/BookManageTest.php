@@ -60,9 +60,7 @@ class BookManageTest extends WebTestCase
         $form = $client->getCrawler()->filter('form')->form([
             'book_form[title]' => 'Book',
             'book_form[author]' => 'Autor',
-
             'book_form[brand]' => 'Dramat',
-
             'book_form[ageThreshold]' => 18,
         ]);
 

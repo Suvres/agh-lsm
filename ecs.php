@@ -13,7 +13,6 @@ use PhpCsFixer\Fixer\ReturnNotation\ReturnAssignmentFixer;
 use Symplify\CodingStandard\Fixer\Commenting\ParamReturnAndVarTagMalformsFixer;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
-// A. standalone rule
     $services = $containerConfigurator->services();
     $services->set(ArraySyntaxFixer::class)
     ->call('configure', [[
@@ -47,6 +46,5 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         SetList::CONTROL_STRUCTURES,
         SetList::STRICT,
         SetList::SYMFONY_RISKY,
-//        SetList::SYMPLIFY
     ]);
 };

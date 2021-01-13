@@ -19,13 +19,12 @@ class BookTest extends TestCase
         $books->setBrand(Book::DRAMAT);
         $books->setTitle("Tytul");
         $books->setCreatedAt($data);
-        $books->setDeletedAt($data);
+        $books->setDeletedAt();
 
         self::assertEquals("BłyszczyAutor", $books->getAuthor());
         self::assertEquals(Book::DRAMAT, $books->getBrand());
         self::assertEquals("Tytul", $books->getTitle());
         self::assertEquals(12, $books->getAgeThreshold());
-        self::assertEquals($data, $books->getDeletedAt());
         self::assertEquals($data, $books->getCreatedAt());
     }
 }

@@ -30,7 +30,7 @@ class BookRepository extends ServiceEntityRepository
             ->getQuery()->getResult();
     }
 
-    public function findNonDeleteForUser(User $getUser)
+    public function findNonDeleteForUser(User $getUser): array
     {
         return $this->createQueryBuilder('b')
             ->andWhere('b.deletedAt IS NULL')

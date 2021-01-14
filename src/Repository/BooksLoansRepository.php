@@ -43,7 +43,7 @@ class BooksLoansRepository extends ServiceEntityRepository
         return new ArrayCollection($qb);
     }
 
-    public function findForUserOrderForLoans(User $getUser)
+    public function findForUserOrderForLoans(User $getUser): ArrayCollection
     {
         $qb = $this->createQueryBuilder('b')
             ->andWhere('b.borrower = :u')->setParameter('u', $getUser)

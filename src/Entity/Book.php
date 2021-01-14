@@ -6,6 +6,7 @@ use App\Repository\BookRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\PersistentCollection;
 use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -67,12 +68,11 @@ class Book
     /**
      * @ORM\OneToMany(targetEntity=BookCopies::class, mappedBy="book", orphanRemoval=true)
      */
-    private $bookCopies;
+    private PersistentCollection $bookCopies;
 
     public function __construct()
     {
         $this->createdAt = new \DateTime();
-        $this->bookCopies = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -140,10 +140,7 @@ class Book
         $this->deletedAt = new \DateTime();
     }
 
-    /**
-     * @return Collection|BookCopies[]
-     */
-    public function getBookCopies(): Collection
+    public function getBookCopies(): PersistentCollection
     {
         return $this->bookCopies;
     }

@@ -18,7 +18,6 @@ class UserDataTest extends WebTestCase
         ]);
         $client->submit($form);
         $client->followRedirect();
-
         self::assertStringContainsString('Invalid credentials.', $client->getCrawler()->text());
 
         $form = $client->getCrawler()->filter('form')->form([
@@ -29,10 +28,9 @@ class UserDataTest extends WebTestCase
         $client->followRedirect();
         $client->followRedirect();
         self::assertStringContainsString('Wypożyczenia', $client->getCrawler()->text());
-
         self::assertStringContainsString('Edytuj dane', $client->getCrawler()->text());
-        $client->clickLink('Edytuj dane');
 
+        $client->clickLink('Edytuj dane');
         $form = $form = $client->getCrawler()->filter('form')->form([
             'user_data_form[name]' => 'Test',
             'user_data_form[surname]' => 'Test',

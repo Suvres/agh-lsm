@@ -1,0 +1,51 @@
+\chapter{Dokumentacja techniczna}
+Poniższy rozdział przedstawia dokumentację techniczną projektu.\ W projekcie skorzystano z kilku gotowych rozwiązań takich jak:
+\begin{itemize}
+    \item \textbf{Bootstrap} - jest to framework wykorzystywany do prostszego i szybszego tworzenia responsywnego interfejsu aplikacji internetowej.\ Dzięki dostarczanym narzędziom pozwala na utrzymywanie raz określonych specyfikacji interfejsu oraz na łatwe ich zmienianie~\cite{Bootstrap2023},
+    \item \textbf{Symfony 5.4} - to bardzo rozbudowany framework dla języka PHP, wykorzystywany do tworzenia skalowalnych i dużych aplikacji internetowych.\ Framework jest zbudowany z wielu komponentów wielokrotnego użytku, dzięki czemu jest możliwość tworzenia aplikacji na miarę potrzeb bez instalacji niepotrzebnych modułów~\cite{Sym2023},
+    \item \textbf{WebSpeechApi} - jest to biblioteka języka JavaScript, która pozwala na rozpoznawanie oraz syntezę mowy~\cite{WebSpeechApi}.
+\end{itemize}
+
+\section{Aplikacja internetowa}
+Serwer aplikacji został napisany przy użyciu języka PHP~7.4 oraz frameworku Symfony~5.4, co pozwoliło na utworzenie aplikacji w architekturze \textit{MVC} \trans{ang. Model View Controler}.\ Umożliwia on zarządzanie aplikacją poprzez wykonywanie operacji na bazie danych, z którą jest połączony.\ Aplikacja suży do zarządzania małą biblioteką, ewentualnie prywatnym zbiorem.\ Pozwala na:
+
+\begin{itemize}
+    \item dodawanie / usuwanie użytkowników
+    \item dodawanie / usuwanie książek
+    \item zarządzanie wypożyczeniami
+\end{itemize}
+
+Aplikacja jest zabezpieczona panelem logowania, dzięki czemu \textit{użytkownik} o roli administratora może zarządzać zbiorem książek oraz użytkowników.\ Przykładowy kod został przedstawiony we \refsource{fragmencie}{frag:ex}, pozwala on na uzyskanie informacji o książce oraz wyświetleniu ich użytkownikowi.
+\pagebreak
+\lstinputlisting[language=PHP, caption={Metoda bookSiteAction}, label=frag:ex]{exampphp.php}
+
+\section{Interfejs graficzny}
+Interfejs graficzny został napisany w językach Html, Css, JavaScript oraz przy użyciu frameworka Bootstrap.\ Pozwoliło to na stworzenie interfejsu graficznego z działającymi przyciskami, zaciąganymi z serwera danymi oraz z prostą kolorystyką co zostało przedstawione na \refsource{zdjęciu}{fig:gui}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{images/gui}
+    \captionsource{Interfejs graficzny na w aplikacji}{Opracowanie własne}
+    \label{fig:gui}
+\end{figure}
+
+\section{Interfejs głosowy}
+Do obsługi interfejsu wykorzystano WebSpeechApi, który został wykorzystany w dwojaki sposób.\ Po pierwsze wykorzystano możliwości biblioteki do rozpoznawania i przetwarzania mowy.\ Dzięki temu po utworzeniu słownika słów kluczowych dostępnego dla aplikacji jest możliwe sterowanie większością funkcjonalności w sposób głosowy.\ Słownik ten został podany w \refsource{tabeli}{tab:keys}.\ Dodatkowo wykorzystane zostały możliwości syntezy mowy, które najlepiej zostały zobrazowane na formularzu dodawania nowych książek, gdzie po wysłaniu niepoprawnych danych aplikacja zwraca się do użytkownika, opisując mu jakie błędy popełnił.
+
+\begin{table}[H]
+    \centering
+    \captionsource{Słownik słów kluczowych}{Opracowanie własne}
+    \label{tab:keys}
+\begin{tabular}{|c|c|c|c|} \hline
+    \multicolumn{4}{|c|}{\textbf{Słownik słów kluczowych}} \\ \hline
+    login & hasło & zaloguj się & ja \\ \hline
+    wyloguj się & użytkownicy & zarządzaj & książki \\ \hline
+    panel & dodaj & dodaj nową & dodaj nową książkę \\ \hline
+    dodaj nowego & tytuł & autor & wiek \\ \hline
+    granica wieku & zapisz & powrót & książka \\ \hline
+    usuń & dodaj kopię & edytuj książkę & wypożycz \\ \hline
+    użytkownik & oddaj & imię & nazwisko \\ \hline
+    email & data & wyszukaj & indeks \\ \hline
+    index & & & \\ \hline
+\end{tabular}
+\end{table}

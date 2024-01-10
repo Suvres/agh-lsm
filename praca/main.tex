@@ -1,0 +1,38 @@
+\documentclass[12pt, openany]{pwrdpl}
+\usepackage{textcomp}
+
+\author{Bartosz Błyszcz}
+\titlePL{System do zarządzania biblioteką wykorzystujący głosowy interfejs użytkownika}
+\thesistype{PROJEKT}
+
+\supervisor{dr inż. Dariusz Banasiak}
+
+\degreeprogramme{Informatyka Techniczna}
+
+\date{2024}
+
+\faculty{Wydział Informatyki i Telekomunikacji}
+
+\begin{document}
+
+	\titlepages
+	\RedefinePlainStyle
+	\setcounter{tocdepth}{2}
+
+	\sloppy
+	\setnowidow
+	
+	\include{wstep}
+	\include{tech}
+	\include{use}
+	\renewcommand*{\listfigurename}{Wykaz rysunków}
+	\renewcommand*{\listtablename}{Wykaz tabel}
+	\renewcommand*{\lstlistlistingname}{Wykaz fragmentów kodu}
+	\listoffigures
+	\clearpage
+	\listoftables
+	\lstlistoflistings
+
+	\printbibliography
+
+\end{document}

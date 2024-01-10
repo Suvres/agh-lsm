@@ -1,0 +1,19 @@
+@startuml
+actor Klient
+
+node server [
+<b>Serwer <b>WWW
+---
+Serwer Biblioteczny
+]
+
+database PostgreSql [
+<b>PostgreSql
+---
+Serwer
+]
+
+
+Klient  <-r-> server
+server <-r-> PostgreSql
+@enduml

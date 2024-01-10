@@ -2,11 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\BookRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\PersistentCollection;
 use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\Validator\Constraints as Assert;
+use App\Repository\BookRepository;
 
 /**
  * @ORM\Entity(repositoryClass=BookRepository::class)
@@ -34,22 +34,28 @@ class Book
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
+     * @Assert\Length(min="3", max="255", minMessage="Autor musi mieć więcej niż {{ limit }} znaków", maxMessage="Autor musi mieć mniej niż {{ limit }} znaków")
      */
     private string $author;
 
     /**
+     * @Assert\NotBlank
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(min="3", max="255", minMessage="Tytuł musi mieć więcej niż {{ limit }} znaków", maxMessage="Tytuł musi mieć mniej niż {{ limit }} znaków")
+     *
      */
     private string $title;
 
     /**
      * @ORM\Column(type="integer")
-     * @Assert\Range(min="0", max="18", notInRangeMessage="Przedział wiekowy powinien zawierać się w zakresie {{ min }} <=> {{ max }}")
+     * @Assert\Range(min="0", max="18", notInRangeMessage="Przedział wiekowy powinien zawierać się w zakresie [{{ min }}, {{ max }}]")
      */
     private int $ageThreshold;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private string $brand;
 

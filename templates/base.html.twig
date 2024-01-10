@@ -3,15 +3,11 @@
     <head>
         <meta charset="UTF-8">
         <title>Biblioteka {% block title %}{% endblock %}</title>
-        {% block vendor_scripts %}
             {{ encore_entry_script_tags('application') }}
             {{ encore_entry_link_tags('application') }}
-        {% endblock %}
 
-        {% block bootstrap %}
-            {{ encore_entry_link_tags('bootstrap') }}
             {{ encore_entry_script_tags('bootstrap') }}
-        {% endblock %}
+            {{ encore_entry_link_tags('bootstrap') }}
 
         {% block stylesheets %}
             <link href="{{ asset('build/app/css/main-styles.css') }}" rel="stylesheet"/>
@@ -30,6 +26,9 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 {{ knp_menu_render('main') }}
             </div>
+            <button id="mic" type="button" class="btn btn-dark">
+                <i class="fa fa-microphone"></i>
+                Mic</div>
         </nav>
 
         <div class="position-absolute w-100 mt-3" style="z-index: 100000000;">
@@ -45,9 +44,325 @@
             {% endfor %}
         </div>
 
+        <script>
+    
+    speechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
+    speechGrammarList = window.SpeechGrammarList || window.webkitSpeechGrammarList
+    speechRecognitionEvent = window.SpeechRecognitionEvent || window.webkitSpeechRecognitionEvent
+    
+    grammar =
+      "#JSGF V1.0; grammar colors; public <color> = zielony | czerwony ; public <cars> = auto | pojazd ;";
+    recognition = new speechRecognition();
+    speechRecognitionList = new speechGrammarList();
+    
+    console.log("asd");
+    speechRecognitionList.addFromString(grammar, 1);
+
+    recognition.grammars = speechRecognitionList;
+    recognition.continuous = true;
+    recognition.lang = "pl-PL";
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 1;    
+    var recognizing = false;
+    var focus = false;
+    var number = false
+    var element = null;
+    var book = false;
+    var user = false;
+    var ddate = false;
+    var index = false;
+
+    recognitionEvent = () => {
+        console.log("start")
+        document.getElementById("mic").onclick = () => {
+            if(!recognizing) {
+                document.getElementById("mic").style.backgroundColor = "red"
+                recognizing = true
+                recognition.abort();
+                recognition.start();
+                console.log("Ready to receive a color command.");
+            }
+        };
+
+      
+          recognition.addEventListener("nomatch", () => {
+            document.getElementById("result").innerText = "Nie rozpoznano mowy, rozpocznij na nowo";
+            document.getElementById("mic").style.backgroundColor = "#343a40"
+                
+            // recognition.start()
+          });
+          
+          recognition.addEventListener("speechend", () => {
+            document.getElementById("result").innerText = "Wykryto koniec mowy, rozpocznij na nowo";
+            document.getElementById("mic").style.backgroundColor = "#343a40"
+            // recognition.start()
+            recognizing = false;
+          });
+          
+          recognition.addEventListener("error", (event) => {
+            document.getElementById("result").innerText = `Wykryto błąd: ${event.error}, rozpocznij na nowo`;
+            document.getElementById("mic").style.backgroundColor = "#343a40"
+            //    recognition.start()
+recognizing = false;
+          });  
+          
+          recognition.onstart = function () {
+            recognizing = true;
+        };    
+    }
+    
+    useRecognition = (method) => {
+        console.log("test");
+        recognition.onresult = (event) => {
+            const text = event.results[event.results.length -1][0].transcript;
+            console.log("result", text);
+            method(text)
+        };
+    }
+
+
+
+    console.log("login speech")
+
+    recognitionEvent()
+    useRecognition((text) => {
+        var tt = text.toLowerCase()
+        console.log(tt)
+        document.getElementById("result").innerText = text
+
+        if(index) {
+            const sss = String(text).trim().slice(0, -1);
+            const _class = 'index-' + textToNumber(sss);
+            document.getElementById(_class).click()
+        }
+
+        if(focus) {
+            var sss = String(text).trim().slice(0, -1);
+            if(number) {
+                element.value = textToNumber(sss);
+            } else if(ddate) {
+                element.value = Date.parse(String(text).trim());
+            } else {
+                element.value = sss;
+            }
+            element.dispatchEvent(new Event("keyup"))
+            element = null
+            number = false;
+            focus = false
+            return
+        }
+
+
+        if(book || user) {
+            var sss = String(text).toLowerCase().trim().slice(0, -1);
+            console.log("asdasd", sss)
+            document.getElementById(sss).click()
+        }
+
+        tt = tt.slice(0, -1)
+        console.log("swi", tt);
+        let utterance = new SpeechSynthesisUtterance("Rozpoznano: " + tt);
+        speechSynthesis.speak(utterance);
+         switch(String(tt).trim()) {
+            case 'login':
+                document.getElementById("inputEmail").focus()
+                focus = true;
+                break;
+            case 'hasło': 
+                document.getElementById("inputPassword").focus()
+                focus = true;
+                break;
+            case 'zaloguj się':
+                document.getElementById("submit").click()
+            break;
+            case 'ja':
+                document.getElementById("Ja").click()
+                break;
+            case 'wyloguj się': 
+                document.getElementById("Wyloguj się").click()
+                break;
+            case 'użytkownicy':
+                document.getElementById("Użytkownicy").click()
+                break;
+            case 'zarządzaj':
+                document.getElementById("Zarządzaj").click()
+                break;
+            case 'książki':
+                document.getElementById("Książki").click()
+                break;
+            case 'panel':
+                document.getElementById("Panel").click()
+                break;
+
+            case 'dodaj':
+            case 'dodaj nową':
+            case 'dodaj nową książkę':
+            case 'dodaj nowego':
+                document.getElementById("dodaj").click()
+                break;
+
+            case 'tytuł':
+                document.getElementById("book_form_title").focus()
+                element = document.getElementById("book_form_title")
+                focus = true
+                break;
+            
+            case 'autor':
+                document.getElementById("book_form_author").focus()
+                element = document.getElementById("book_form_author")
+                focus = true
+                break;
+            case 'wiek':
+                document.getElementById("book_form_ageThreshold").focus()
+                element = document.getElementById("book_form_ageThreshold")
+                focus = true
+                number = true
+                break;
+            case 'granica wieku':
+                document.getElementById("book_form_ageThreshold").focus()
+                element = document.getElementById("book_form_ageThreshold")
+                focus = true
+                number = true
+                break;
+
+            case 'zapisz':
+                document.getElementById("zapisz").click()
+                break;
+            case 'powrót':
+                document.getElementById("powrot").click()
+                break;
+
+            case 'książka':
+                document.getElementById("książka").style.backgroundColor = 'red'
+                book = true
+                break;
+            case 'usuń':
+                document.getElementById("book-del").click()
+                break;
+            case 'dodaj kopię':
+                document.getElementById("book-new-copy").click();
+                break;
+            case 'edytuj książkę':
+                document.getElementById("book-edit").click();
+                break;
+            case 'wypożycz':
+                document.getElementById("new-loan").click();
+                document.getElementById("new-loan").style.backgroundColor = "red";
+                break;
+            case 'użytkownik':
+                document.getElementById("user").style.backgroundColor = 'red'
+                user = true
+                break;
+            case 'oddaj':
+                document.getElementById("loan-return").click();
+                break;
+            case 'imię':
+                document.getElementById("user_form_name").focus();
+                element = document.getElementById("user_form_name");
+                focus = true;
+                break;
+            case 'nazwisko':
+                element = document.getElementById("user_form_surname");
+                document.getElementById("user_form_surname").focus();
+                focus = true;
+                break;
+            case 'email':
+                element = document.getElementById("user_form_email");
+                document.getElementById("user_form_email").focus();
+                focus = true;
+                break;
+            case 'data':
+                element = document.getElementById("user_form_birthDate");
+                document.getElementById("user_form_birthDate").focus();
+                focus = true;
+                ddate = true;
+                break;
+            case 'wyszukaj':
+                 element = document.querySelector("#booksCopies_filter label input");
+                 element.focus();
+                 focus = true;
+                 break;
+             case 'indeks':
+             case 'index':
+                 element = document.querySelectorAll(".index");
+                 element.forEach(n => {
+                     n.style.backgroundColor = "red"
+                 })
+                 index = true
+                 break;
+        }
+    })
+
+
+
+
+    textToNumber = (text) => {
+        switch(text) {
+            case "jeden":
+            case " jeden":
+                return 1;
+            case "dwa":
+            case " dwa":
+                return 2;
+            case "trzy":
+            case " trzy":
+                return 3;
+            case "cztery":
+            case " cztery":
+                return 4;
+            case "pięć":
+            case " pięć":
+                return 5;
+            case "sześć":
+            case " sześć":
+                return 6;
+            case "siedem":
+            case " siedem":
+                return 7;
+            case "osiem":
+            case " osiem":
+                return 8;
+            case "dziewięć":
+            case " dziewięć":
+                return 9;
+            case "dziesięć":
+            case " dziesięć":
+                return 10;
+            case "jedenaście":
+            case " jedenaście":
+                return 11;
+            case "dwanaście":
+            case " dwanaście":
+                return 12;
+            case "trzynaście":
+            case " trzynaście":
+                return 13;
+            case "czternaście":
+            case " czternaście":
+                return 14;
+            case "piętnaście":
+            case " piętnaście":
+                return 15;
+            case "szesnaście":
+            case " szesnaście":
+                return 16;
+            case "siedemnaście":
+            case " siedemnaście":
+                return 17;
+            case "osiemnaście":
+            case " osiemnaście":
+                return 18;
+            default: 
+                return parseInt(text)
+        }
+    } 
+    </script>
+
         <div class="container-xl mt-4">
+            <p id="result">Wynik mowy: <span id="resres"></span></p>
             {% block body %}{% endblock %}
         </div>
-        {% block javascripts %}{% endblock %}
+        {% block javascripts %}
+        {% endblock %}
     </body>
 </html>

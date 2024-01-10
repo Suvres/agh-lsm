@@ -6,19 +6,48 @@
             <h3 class="m-0 d-inline">Wypożycz / Oddaj</h3>
         </div>
     </div>
-
-    <div class="input-group mb-3">
-        <div class="input-group-prepend">
-            <label class="input-group-text" for="search-copy">Wypożycz</label>
-        </div>
-        <select class="custom-select" id="search-copy">
-            <option selected>Szukaj...</option>
-            {%- for copy in books -%}
-                <option value="{{ copy.id }}" data-book="{{ copy.book.title }}" data-url="{{ path('admin_loan_info', { bookCopy: copy.id }) }}">{{ copy.hashcode }}</option>
-            {%- endfor -%}
-        </select>
-    </div>
-    <div class="mt-3" id="book-info"></div>
+    <p>Aby wypożyczyć / oddać należy powiedzieć indeks, a po zaznaczeniu na czerwono, powiedzieć numer indeksu</p>
+        <table id="booksCopies" class="w-100">
+            <thead>
+                <tr>
+                    <th class="index">Indeks</th>
+                    <th>Tytuł</th>
+                    <th>Autor</th>
+                    <th>Granica wieku</th>
+                    <th>Gatunek</th>
+                    <th>Wypożyczono</th>
+                    <th>Akcja</th>
+                </tr>
+            </thead>
+            <tbody>
+                {%- for copy in books -%}
+                    <tr>
+                    <td class="index">{{ copy.id }}</td>
+                    <td>{{ copy.book.title }}</td>
+                    <td>{{ copy.book.author }}</td>
+                    <td>{{ copy.book.ageThreshold }}</td>
+                    <td>{{ copy.book.brand }}</td>
+                    {% set loan = copy|is_in_loans %}
+                    {% if loan %}
+                        <td>
+                            <span class="badge badge-primary">{{ (loan).borrower.email }} - {{ (loan).startedAt|date('Y-m-d') }}</span>
+                        </td>
+                    {% else %}
+                        <td>
+                            <span class="badge badge-secondary">Nie</span>
+                        </td>
+                    {% endif %}
+                    <td>
+                        {% if not loan %}
+                            <a id="index-{{ copy.id }}" class="new-loan btn btn-primary" href="{{ path('admin_loan_new', {bookCopy: copy.id}) }}"><i class="fa fa-check"></i>&nbsp;Wypożycz</a>
+                        {% else %}
+                            <a id="index-{{ copy.id }}" class="btn btn-warning loan-return" href="{{ path('admin_loan_return', {loan: loan.id}) }}">Oddaj</a>
+                        {% endif %}
+                    </td>
+                    </tr>
+                {%- endfor -%}
+            </tbody>
+        </table>
 {% endblock %}
 
 {% block javascripts %}

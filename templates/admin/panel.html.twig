@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-md-4">
             <div class="card border-warning">
-                <div class="card-header bg-warning font-weight-bold">Ilość czytelników</div>
+                <div class="card-header bg-warning font-weight-bold">Liczba czytelników</div>
                 <div class="card-body text-center">
                     {{ users|length }}
                 </div>
@@ -12,7 +12,7 @@
         </div>
         <div class="col-md-4">
             <div class="card border-primary">
-                <div class="card-header bg-primary font-weight-bold">Ilość Ksiązek</div>
+                <div class="card-header bg-primary font-weight-bold">Liczba Ksiązek</div>
                 <div class="card-body text-center">
                     {{ bookCopies|length }}
                 </div>
@@ -20,7 +20,7 @@
         </div>
         <div class="col-md-4">
             <div class="card border-info">
-                <div class="card-header bg-info font-weight-bold">Ilość aktualnych wypożyczeń</div>
+                <div class="card-header bg-info font-weight-bold">Liczba aktualnych wypożyczeń</div>
                 <div class="card-body text-center">
                     {{ loans|length }}
                 </div>
@@ -54,4 +54,5 @@
             </tbody>
         </table>
     </div>
+    
 {% endblock %}

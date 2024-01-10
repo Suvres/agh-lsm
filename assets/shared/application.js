@@ -1,5 +1,9 @@
 import $ from 'jquery'
 global.$ = $;
+window.jQuery = $;
+window.$ = $;
+Window.prototype.$ = $
+
 global.postLink = function(url) {
     let form = $('<form>', {
         method: 'post',

@@ -1,57 +1,61 @@
+import '../shared/application'
+
 $(function () {
-    $('#search-copy').select2({
-        theme: 'bootstrap4',
-        templateResult: formatCopy,
-    }).on('select2:select', function (e) {
-        loadInfo(e)
+    $("#booksCopies").DataTable({
+        language: {
+            "search": "Wyszukaj:",
+            "info": "Wpisy  _START_ - _END_ / _TOTAL_",
+            "paginate": {
+                "first":      "Pierwsza",
+                "last":       "Ostatnia",
+                "next":       "Następna",
+                "previous":   "Poprzednia"
+            },
+            "lengthMenu":     "Licza _MENU_ wpisów",
+        },
+        initComplete: function () {
+            this.api()
+                .columns()
+                .every(function () {
+                    let column = this;
+
+                    // Create input element
+                    let input = document.createElement('input');
+
+                    // Event listener for user input
+                    input.addEventListener('keyup', () => {
+                        if (column.search() !== this.value) {
+                            column.search(input.value).draw();
+                        }
+                    }, false);
+                });
+        }
     });
 
-})
 
-
-function formatCopy (copy) {
-    if(isNaN(copy.id)) {
-        return copy.text
-    }
-
-    return $('<span>' + copy.element.dataset.book  + " <=> "+ copy.text+'</span>');
-}
-
-function loadInfo(e) {
-    let data = e.params.data;
-    if(isNaN(data.id)){
-        return;
-    }
-    let url = data.element.dataset.url;
-    fetch(url, {method: "POST"})
-        .then(response => response.text())
-        .then((body) => {
-            $("#book-info").html(body)
-        })
-        .then(() => {
-            loan();
-        })
-}
-
-function loan(){
-    $("#new-loan").on('click', function (){
-        fetch($(this).data('path'), {method: "POST"})
-            .then(response => response.text())
-            .then((body) => {
-                $("#book-loan").html(body);
-            })
-            .then(() => {
-                $("#book_loan_form_user").select2({
-                    theme: 'bootstrap4',
-                })
-            });
-    })
-
-    $("#loan-return").on("click", function (e) {
-        e.preventDefault();
-        if(confirm("Czy na pewno chcesz oddać tą książkę")) {
-            postLink(e.target.href);
+    function formatCopy (copy) {
+        if(isNaN(copy.id)) {
+            return copy.text
         }
 
-    })
-}
+        return $('<span>' + copy.element.dataset.book  + " <=> "+ copy.text+'</span>');
+    }
+
+    function loadInfo(e) {
+        let data = e.params.data;
+        if(isNaN(data.id)){
+            return;
+        }
+        let url = data.element.dataset.url;
+        fetch(url, {method: "POST"})
+            .then(response => response.text())
+            .then((body) => {
+                $("#book-info").html(body)
+            })
+            .then(() => {
+                loan();
+            })
+    }
+
+
+})

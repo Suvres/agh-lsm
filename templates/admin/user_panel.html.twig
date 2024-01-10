@@ -4,8 +4,9 @@
     <div class="mt-5">
         <div class="border-bottom border-info mb-4">
             <h3 class="m-0 d-inline">Wszyscy użytkownicy</h3>
-            <a class="float-right badge badge-success" href="{{ path('admin_user_panel_new') }}"><i class="fa fa-plus"></i>&nbsp;Dodaj nowego</a>
+            <a id="dodaj" class="float-right badge badge-success" href="{{ path('admin_user_panel_new') }}"><i class="fa fa-plus"></i>&nbsp;Dodaj nowego</a>
         </div>
+        <p id="user">Aby wybrać użytkownika należy powiedziec słowo użytkownik, a następnie wybrać użytkownika</p>
     </div>
 
     <table class="table" id="userTable">
@@ -24,7 +25,7 @@
                 <th scope="row">{{ loop.index }}</th>
                 <td>{{ user.name }}</td>
                 <td>{{ user.surname }}</td>
-                <td><a href="{{ path('admin_user_panel_info', {user: user.id}) }}">{{ user.email }}</a></td>
+                <td><a id="{{user.email | lower}}" href="{{ path('admin_user_panel_info', {user: user.id}) }}">{{ user.email }}</a></td>
                 <td>{{ user.booksLoans|length }}</td>
             </tr>
         {% endfor %}

@@ -4,7 +4,7 @@
     <div class="mt-5">
         <div class="border-bottom border-info mb-4">
             <h3 class="m-0 d-inline">Nowa książka</h3>
-            <a class="badge badge-secondary float-right" href="{{ path('admin_book_panel') }}"><i class="fa fa-arrow-left"></i>&nbsp;Powrót</a>
+            <a class="badge badge-secondary float-right" href="{{ path('admin_book_panel') }}" id="powrot"><i class="fa fa-arrow-left"></i>&nbsp;Powrót</a>
         </div>
     </div>
         {{ form_start(form) }}
@@ -14,7 +14,7 @@
         {{ form_row(form.ageThreshold) }}
         <div class="form-group row">
             <div class="col-sm-10 offset-sm-2">
-                <button type="submit" class="btn btn-success w-100">Zapisz</button>
+                <button type="submit" id="zapisz" class="btn btn-success w-100">Zapisz</button>
             </div>
         </div>
         {{ form_end(form) }}

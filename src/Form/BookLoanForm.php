@@ -16,6 +16,7 @@ class BookLoanForm extends AbstractType
         $builder->add('user', EntityType::class, [
             'class' => User::class,
             'label' => 'Użytkownik',
+            'placeholder' => 'Wybierz użytkownika',
             'choice_label' => 'email',
         ]);
     }

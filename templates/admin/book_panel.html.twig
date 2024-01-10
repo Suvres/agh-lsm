@@ -4,10 +4,10 @@
 <div class="mt-5">
     <div class="border-bottom border-info mb-4">
         <h3 class="m-0 d-inline">Wszystkie książki</h3>
-        <a class="float-right badge badge-success" href="{{ path('admin_book_panel_new') }}"><i class="fa fa-plus"></i>&nbsp;Dodaj nową</a>
+        <a id="dodaj" class="float-right badge badge-success" href="{{ path('admin_book_panel_new') }}"><i class="fa fa-plus"></i>&nbsp;Dodaj nową</a>
     </div>
 </div>
-
+    <p id="książka">Aby słownie wybrać książka najpierw wypowiedz słowo książka a następnie tytuł</p>
     <table class="table" id="bookTable">
         <thead>
         <tr>
@@ -25,7 +25,7 @@
             <tr>
                 <th scope="row">{{ loop.index }}</th>
                 <td>{{ book.author }}</td>
-                <td><a class="btn btn-link" href="{{ path('admin_book_site', { book: book.id }) }}">{{ book.title }}</a></td>
+                <td><a class="btn btn-link" id="{{book.title | lower}}" href="{{ path('admin_book_site', { book: book.id }) }}">{{ book.title }}</a></td>
                 <td>{{ book.brand }}</td>
                 <td>{{ book.ageThreshold }}</td>
                 <td>{{ book.bookCopies|length }}</td>

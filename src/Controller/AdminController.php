@@ -177,7 +177,7 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/book/loans/return/{loan}", name="admin_loan_return", requirements={"loan"="\d{1,9}"}, methods={"POST"})
+     * @Route("/book/loans/return/{loan}", name="admin_loan_return", requirements={"loan"="\d{1,9}"}, methods={"GET"})
      */
     public function bookLoanReturn(BooksLoans $loan): Response
     {
@@ -185,11 +185,11 @@ class AdminController extends AbstractController
         $this->entityManager->flush();
         $this->addFlash('success', 'Oddano książkę');
 
-        return $this->redirectToRoute('home');
+        return $this->redirectToRoute('admin_loan');
     }
 
     /**
-     * @Route("/book/loans/new/{bookCopy}", name="admin_loan_new", requirements={"bookCopy"="\d{1,9}"}, methods={"POST"})
+     * @Route("/book/loans/new/{bookCopy}", name="admin_loan_new", requirements={"bookCopy"="\d{1,9}"})
      */
     public function bookLoanAction(BookCopies $bookCopy, Request $request): Response
     {
@@ -201,6 +201,7 @@ class AdminController extends AbstractController
 
         $bookLoanDTO = new BookLoanDTO();
         $form = $this->createForm(BookLoanForm::class, $bookLoanDTO);
+
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             if ($this->booksLoansService->borrow($bookLoanDTO, $bookCopy)) {
@@ -211,12 +212,11 @@ class AdminController extends AbstractController
                 $this->addFlash('danger', 'Nie można wypożyczyć książki, prawdopodobnie przekroczono limit książek');
             }
 
-            return $this->redirectToRoute('home');
+            return $this->redirectToRoute("admin_loan");
         }
 
-        return $this->render('admin/_book_loan.html.twig', [
+        return $this->render('admin/book_loan_form.html.twig', [
             'form' => $form->createView(),
-            'bookCopy' => $bookCopy,
         ]);
     }
 

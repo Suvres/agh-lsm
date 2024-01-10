@@ -43,8 +43,8 @@ yarn-error.log
 ###< friendsofphp/php-cs-fixer ###
 
 .phpdoc
-bin/rule-doc-generator
-bin/phpcs
-bin/phpcbf
-bin/php-cs-fixer
-bin/ecs
+./bin/rule-doc-generator
+./bin/phpcs
+./bin/phpcbf
+./bin/php-cs-fixer
+./bin/ecs

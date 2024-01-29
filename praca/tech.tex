@@ -7,7 +7,7 @@ Poniższy rozdział przedstawia dokumentację techniczną projektu.\ W projekcie
 \end{itemize}
 
 \section{Aplikacja internetowa}
-Serwer aplikacji został napisany przy użyciu języka PHP~7.4 oraz frameworku Symfony~5.4, co pozwoliło na utworzenie aplikacji w architekturze \textit{MVC} \trans{ang. Model View Controler}.\ Umożliwia on zarządzanie aplikacją poprzez wykonywanie operacji na bazie danych, z którą jest połączony.\ Aplikacja suży do zarządzania małą biblioteką, ewentualnie prywatnym zbiorem.\ Pozwala na:
+Serwer aplikacji został napisany przy użyciu języka PHP~7.4 oraz frameworku Symfony~5.4, co pozwoliło na utworzenie aplikacji w architekturze \textit{MVC} \trans{ang. Model View Controler}.\ Umożliwia on zarządzanie aplikacją poprzez wykonywanie operacji na bazie danych, z którą jest połączony.\ Aplikacja służy do zarządzania małą biblioteką, ewentualnie prywatnym zbiorem.\ Pozwala na:
 
 \begin{itemize}
     \item dodawanie / usuwanie użytkowników
@@ -24,8 +24,8 @@ Interfejs graficzny został napisany w językach Html, Css, JavaScript oraz przy
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.5\textwidth]{images/gui}
-    \captionsource{Interfejs graficzny na w aplikacji}{Opracowanie własne}
+    \includegraphics[width=0.75\textwidth]{images/gui}
+    \captionsource{Interfejs graficzny w aplikacji}{Opracowanie własne}
     \label{fig:gui}
 \end{figure}
 
@@ -49,3 +49,27 @@ Do obsługi interfejsu wykorzystano WebSpeechApi, który został wykorzystany w 
     index & & & \\ \hline
 \end{tabular}
 \end{table}
+
+Kod do obsługi tego interfejsu został w pełni napisany w języku Java Script.\ Kod opisany we fragmencie~\ref{frag:l2} Przedstawia wstępną konfigurację biblioteki WebSpeechApi, która jest wykorzystywana w projekcie.\ Powyższe fragmenty kodu przedstawiają kod napisany w języku JavaScript, którego oddziaływania na interfejs graficzny zostały opisane w części dokumentacji użytkowej, gdzie wskazywane są poszczególne funkcjonalności.
+
+\lstinputlisting[language=HTML, caption={Konfiguracja WebSpeechApi}, label=frag:l2]{lang2.js}
+
+Za rozpoznawanie i przetwarzanie słów na cyfry odpowiada metoda zawarta we fragmencie~\ref{frag:l1}.
+\lstinputlisting[language=HTML, caption={Metoda zamieniająca słowa na cyfry}, label=frag:l1]{lang1.js}
+
+Kod ukazany we fragmencie~\ref{frag:l5} odpowiada za konfigurację wydarzeń na stronie, które uruchamiają i wyłączają nasłuchiwanie.\ Dodatkowo odpowiada za obsłużenie wydarzeń biblioteki.\ Wydarzenia obsługiwane to:
+\begin{itemize}
+\item nomatch - nie rozpoznano mowy
+\item speechend - wykryto koniec mowy
+\item error - inny błąd
+\end{itemize}
+
+\lstinputlisting[language=HTML, caption={Obsługa wydarzeń związanych z mową}, label=frag:l5]{lang5.js}
+
+Fragment kodu~\ref{frag:l3} odpowiada za wykorzystanie rezultatu przetwarzania mowy na tekst i obsłużenie różnych akcji m.in. uzupełniania formularzy.
+
+\lstinputlisting[language=HTML, caption={Obsługa rezultatu rozpoznawania mowy}, label=frag:l3]{lang3.js}
+
+Ostatni fragment~\ref{frag:l4} obsługuje słownik słów kluczowych na stronie, wykonując odpowiednie akcje przypisane do poszczególnych słów.
+
+\lstinputlisting[language=HTML, caption={Obsługa słów kluczowych}, label=frag:l4]{lang4.js}
